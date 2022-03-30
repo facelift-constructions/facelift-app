@@ -1,5 +1,3 @@
-import 'package:facelift_constructions/log_in/welcome.dart';
-import 'package:facelift_constructions/premium/new_premium_user.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -7,6 +5,8 @@ import 'models/models.dart';
 import 'services/auth_service.dart';
 import '../constants.dart';
 import 'services/databases.dart';
+import 'log_in/welcome.dart';
+import 'premium/new_premium_user.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -27,7 +27,31 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
   String newName = "newUser";
   var codeChose = "+91";
   bool vis = false;
-  List countryCodes = ["+1", "+2", "+3", "+4", "+91", "+92", "+93", "+94"];
+  bool isLoading = false;
+  List countryCodes = [
+    "+1",
+    "+20",
+    "+52",
+    "+60",
+    "+62",
+    "+63",
+    "+65",
+    "+66",
+    "+81",
+    "+84",
+    "+880",
+    "+91",
+    "+92",
+    "+94",
+    "+95",
+    "+960",
+    "+968",
+    "+971",
+    "+972",
+    "+974",
+    "+977",
+    "+98",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -40,21 +64,31 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: size.height * 0.2),
-                const Text(
-                  "Sign Up",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.grey,
-                  ),
+                SizedBox(height: size.height * 0.1),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    specialIcon(false),
+                    const Text(
+                      "Sign Up",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    specialIcon(true),
+                  ],
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 50),
                 SizedBox(
                   width: size.width * 0.85,
-                  child: const Text("Full Name"),
+                  child: const Text(
+                    "Full Name",
+                    style: TextStyle(fontSize: 16),
+                  ),
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 10),
                 SizedBox(
                   height: 50,
                   width: size.width * 0.9,
@@ -79,12 +113,15 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 35),
                 SizedBox(
                   width: size.width * 0.85,
-                  child: const Text("Mobile Number"),
+                  child: const Text(
+                    "Mobile Number",
+                    style: TextStyle(fontSize: 16),
+                  ),
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 10),
                 textField(size),
                 const SizedBox(height: 50),
                 Visibility(
@@ -142,42 +179,77 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                 const SizedBox(height: 40),
                 Visibility(
                   visible: vis,
-                  child: InkWell(
-                    onTap: () {
-                      authClass
-                          .signInwithPhoneNumber(
-                              verificationIdFinal, smsCode, context)
-                          .whenComplete(() => DatabaseService()
-                              .updateUserProfil(
-                                  newName == ""
-                                      ? "New User"
-                                      : capitalize(newName),
-                                  "",
-                                  "",
-                                  ""));
-                    },
-                    child: Container(
-                      height: 50,
-                      width: 200,
-                      decoration: BoxDecoration(
-                          color: pinkColor,
-                          borderRadius: BorderRadius.circular(32)),
-                      child: const Center(
-                        child: Text(
-                          "Lets Go",
-                          style: TextStyle(
-                              fontSize: 17,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700),
+                  child: isLoading
+                      ? const CircularProgressIndicator()
+                      : InkWell(
+                          onTap: () {
+                            setState(() {
+                              isLoading = true;
+                            });
+                            authClass
+                                .signInwithPhoneNumber(
+                                    verificationIdFinal, smsCode, context)
+                                .whenComplete(
+                                  () => DatabaseService()
+                                      .updateUserProfil(
+                                        newName == ""
+                                            ? "New User"
+                                            : capitalize(newName),
+                                        "",
+                                        "",
+                                        "",
+                                      )
+                                      .whenComplete(() => isLoading = false),
+                                );
+                          },
+                          child: Container(
+                            height: 50,
+                            width: 200,
+                            decoration: BoxDecoration(
+                                color: pinkColor,
+                                borderRadius: BorderRadius.circular(32)),
+                            child: const Center(
+                              child: Text(
+                                "Lets Go",
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
                 ),
+                const SizedBox(height: 20),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget specialIcon(bool rev) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: Row(
+        children: [
+          Icon(
+            Icons.circle,
+            size: rev ? 16 : 12,
+            color: pinkColor,
+          ),
+          Icon(
+            Icons.circle,
+            size: rev ? 14 : 14,
+            color: pinkColor,
+          ),
+          Icon(
+            Icons.circle,
+            size: rev ? 12 : 16,
+            color: pinkColor,
+          ),
+        ],
       ),
     );
   }
@@ -232,7 +304,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
         children: [
           SizedBox(
             height: 50,
-            width: 77,
+            width: 87,
             child: DropdownButtonFormField(
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10),
@@ -259,7 +331,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
           const SizedBox(width: 3),
           Container(
             height: 50,
-            width: size.width * 0.9 - 80,
+            width: size.width * 0.9 - 90,
             padding: const EdgeInsets.symmetric(horizontal: 8),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
@@ -293,11 +365,6 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                   onTap: wait
                       ? () => showSnackBar(context, "Wait for timer to finish")
                       : () async {
-                          // showSnackBar(
-                          //     context, "$codeChose ${phoneController.text}");
-                          // setState(() {
-                          //   vis = true;
-                          // });
                           showSnackBarDuration(context, "Redirecting...", 5);
                           startTimer();
                           setState(() {

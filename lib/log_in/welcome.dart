@@ -20,7 +20,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   void initState() {
     super.initState();
-    Timer.periodic(const Duration(seconds: 2), (Timer timer) {
+    Timer.periodic(const Duration(milliseconds: 1500), (Timer timer) {
       if (currentPage < 2) {
         currentPage++;
         pageController.animateToPage(
@@ -54,7 +54,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         "Upload bills, get ideas, track progress, store plans, make payments, and so much more right from your smartphone…",
         "assets/images/1.png",
         "Welcome,",
-        true,
       ),
       welcomeContent(
         context,
@@ -62,7 +61,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         "Appoint, overlook, replace, raise an issue with the on-site laborers in one click from the app.",
         "assets/images/2.png",
         "",
-        true,
       ),
       welcomeContent(
         context,
@@ -70,10 +68,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         "Over 750 highest quality materials & products to choose from 170+ National & International brands directly at your site…",
         "assets/images/3.png",
         "",
-        false,
       ),
     ];
-    
+
     return WillPopScope(
       onWillPop: () => showExitPopup(context),
       child: Scaffold(
@@ -149,7 +146,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   Widget welcomeContent(BuildContext context, String heading, String text,
-      String image, String welcome, bool arrow) {
+      String image, String welcome) {
     return Column(
       children: [
         const Spacer(flex: 2),
@@ -166,24 +163,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
           ),
         ),
-        arrow
-            ? Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    ClipOval(
-                      child: Container(
-                        height: 35,
-                        width: 35,
-                        decoration: BoxDecoration(color: Colors.grey.shade400),
-                        child: const Icon(Icons.arrow_forward),
-                      ),
-                    )
-                  ],
-                ),
-              )
-            : const SizedBox(height: 35),
         const Spacer(flex: 3),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
