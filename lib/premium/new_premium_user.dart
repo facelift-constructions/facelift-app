@@ -67,7 +67,7 @@ class _NewPrimiumUserScreenState extends State<NewPrimiumUserScreen> {
       });
       // showSimpleAnimatedDialogBox(context, "name", 3, "2.png");
       showAnimatedDialogBox(
-          context, "Congratulations", false, 3, "2.png", false, 1);
+          context, "Congratulations!", false, 3, "2.png", false, 1);
       await DatabaseService().updateUserPremium(true);
       await DatabaseService().updateUserPremiumData(
         capitalize(premiumName),

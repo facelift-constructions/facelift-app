@@ -119,7 +119,7 @@ class RawSceen extends StatelessWidget {
 
                 showSimpleAnimatedDialogBox(
                     context,
-                    "Best in quality ${material.name} will be povided",
+                    "Best in quality ${material.name} will be provided",
                     3,
                     "7.png");
               },
@@ -133,6 +133,7 @@ class RawSceen extends StatelessWidget {
                 child: Center(child: Text("Get ${material.name}")),
               ),
             ),
+            SizedBox(height: 10)
             // Padding(
             //   padding: EdgeInsets.all(32),
             //   child: GetPremiumButton(),

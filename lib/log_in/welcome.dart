@@ -1,7 +1,9 @@
-import 'package:facelift_constructions/constants.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../dialogs.dart';
+import '../constants.dart';
 import 'phone_auth_page.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -13,10 +15,39 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   int currentPage = 0;
+  PageController pageController = PageController();
+
+  @override
+  void initState() {
+    super.initState();
+    Timer.periodic(const Duration(seconds: 2), (Timer timer) {
+      if (currentPage < 2) {
+        currentPage++;
+        pageController.animateToPage(
+          currentPage,
+          duration: const Duration(milliseconds: 350),
+          curve: Curves.easeIn,
+        );
+      } else {
+        currentPage = 0;
+        pageController.animateToPage(
+          currentPage,
+          duration: const Duration(milliseconds: 350),
+          curve: Curves.easeIn,
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    List contentList = [
+    List<Widget> contentList = [
       welcomeContent(
         context,
         "Manage your house construction",
@@ -42,7 +73,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         false,
       ),
     ];
-
+    
     return WillPopScope(
       onWillPop: () => showExitPopup(context),
       child: Scaffold(
@@ -51,12 +82,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           child: Column(
             children: [
               Expanded(
-                  flex: 15,
-                  child: PageView.builder(
-                      onPageChanged: (value) =>
-                          setState(() => currentPage = value),
-                      itemCount: 3,
-                      itemBuilder: (context, index) => contentList[index])),
+                flex: 15,
+                child: PageView.builder(
+                  itemCount: 3,
+                  controller: pageController,
+                  onPageChanged: (value) => setState(() => currentPage = value),
+                  itemBuilder: (context, index) => contentList[index],
+                ),
+              ),
               Expanded(
                 flex: 4,
                 child: Column(

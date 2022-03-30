@@ -14,7 +14,7 @@ class ProgressScreen extends StatefulWidget {
 class _ProgressScreenState extends State<ProgressScreen> {
   @override
   Widget build(BuildContext context) {
-    int val1 = 4;
+    int val1 = 3;
     int val2 = 2;
     int val3 = 1;
     int val4 = 1;
