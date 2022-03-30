@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "819574419259",
+    "project_id": "facelift-d176f",
+    "storage_bucket": "facelift-d176f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819574419259:android:f61fbe51013621eb96d11e",
+        "android_client_info": {
+          "package_name": "com.facelift.constructions"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "819574419259-hkuv5vs9k3v91nbapcg6vdidoa2o2um3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.facelift.constructions",
+            "certificate_hash": "cff22fa7163847c20014bba49ee00b5011ce29df"
+          }
+        },
+        {
+          "client_id": "819574419259-je6tfi6ujfj6i0e43kllrtba442fpfuo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.facelift.constructions",
+            "certificate_hash": "717f1ec68ae2f8b21b5278ec5a66788668946d36"
+          }
+        },
+        {
+          "client_id": "819574419259-sgrrkqftkm158lr52ohccju089s15dre.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.facelift.constructions",
+            "certificate_hash": "fc4bcc35d1543b55b44d652f8d89c5b7f3795702"
+          }
+        },
+        {
+          "client_id": "819574419259-5geu9mqkbbbbsh75lj68rnupsghp6j98.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7MPnEsXLDs1Y7ofuZvr6HeZ6URhLHanE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819574419259-5geu9mqkbbbbsh75lj68rnupsghp6j98.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
