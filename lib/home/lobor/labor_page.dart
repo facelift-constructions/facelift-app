@@ -56,14 +56,15 @@ class LaborScreen extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  final time = DateTime.now().millisecondsSinceEpoch;
-                  if (labor.name == "Tile/Marble Mistri") {
-                    DatabaseService()
-                        .updateUserRequestLabor(time, true, "marble_mistr");
-                  } else {
-                    DatabaseService()
-                        .updateUserRequestLabor(time, true, labor.name);
-                  }
+                  DatabaseService().createRequest("Labor", labor.name);
+                  // final time = DateTime.now().millisecondsSinceEpoch;
+                  // if (labor.name == "Tile/Marble Mistri") {
+                  //   DatabaseService()
+                  //       .updateUserRequestLabor(time, true, "marble_mistr");
+                  // } else {
+                  //   DatabaseService()
+                  //       .updateUserRequestLabor(time, true, labor.name);
+                  // }
                   showSimpleAnimatedDialogBox(
                       context, "A ${labor.name} will be apointed", "1.png");
                 },

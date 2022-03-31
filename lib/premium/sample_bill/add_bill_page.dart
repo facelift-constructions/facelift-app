@@ -1,14 +1,12 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'dart:io';
 
-import 'package:facelift_constructions/constants.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../constants.dart';
 import '../../models/models.dart';
 import '../../services/databases.dart';
 
@@ -41,11 +39,11 @@ class _AddBillScreenState extends State<AddBillScreen> {
         barrierDismissible: true,
         animationType: DialogTransitionType.slideFromBottom,
         curve: Curves.fastOutSlowIn,
-        duration: Duration(seconds: 1),
+        duration: const Duration(seconds: 1),
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Choose option"),
+            title: const Text("Choose option"),
             content: SingleChildScrollView(
               child: ListBody(children: [
                 ListTile(
@@ -53,14 +51,14 @@ class _AddBillScreenState extends State<AddBillScreen> {
                     imagePickerFunc();
                     Navigator.pop(context);
                   },
-                  title: Text("Gallery"),
+                  title: const Text("Gallery"),
                 ),
                 ListTile(
                   onTap: () {
                     imagePickerCameraFunc();
                     Navigator.pop(context);
                   },
-                  title: Text("Camera"),
+                  title: const Text("Camera"),
                 ),
               ]),
             ),
@@ -149,9 +147,9 @@ class _AddBillScreenState extends State<AddBillScreen> {
         backgroundColor: Colors.transparent,
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back_ios_new),
+          icon: const Icon(Icons.arrow_back_ios_new),
         ),
-        title: Text("Add a Bill", style: TextStyle(color: Colors.black)),
+        title: const Text("Add a Bill", style: TextStyle(color: Colors.black)),
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.black54),
       ),
@@ -161,8 +159,8 @@ class _AddBillScreenState extends State<AddBillScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 16, left: 32, bottom: 8),
+              const Padding(
+                padding: EdgeInsets.only(top: 16, left: 32, bottom: 8),
                 child: Text(
                   "Name of Bill",
                   style: TextStyle(fontSize: 14),
@@ -185,7 +183,7 @@ class _AddBillScreenState extends State<AddBillScreen> {
                       name = val;
                     }),
                     decoration: InputDecoration(
-                      errorStyle: TextStyle(fontSize: 0.1),
+                      errorStyle: const TextStyle(fontSize: 0.1),
                       fillColor: Colors.grey.shade200,
                       filled: true,
                       hintText: "Cement, Pipes e.t.c.",
@@ -193,28 +191,28 @@ class _AddBillScreenState extends State<AddBillScreen> {
                         fontSize: 14,
                         color: Colors.grey.shade500,
                       ),
-                      contentPadding: EdgeInsets.only(left: 12),
+                      contentPadding: const EdgeInsets.only(left: 12),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black12),
+                        borderSide: const BorderSide(color: Colors.black12),
                         borderRadius: BorderRadius.circular(24),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black12),
+                        borderSide: const BorderSide(color: Colors.black12),
                         borderRadius: BorderRadius.circular(24),
                       ),
                       focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red),
+                        borderSide: const BorderSide(color: Colors.red),
                         borderRadius: BorderRadius.circular(24),
                       ),
                       errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red),
+                        borderSide: const BorderSide(color: Colors.red),
                         borderRadius: BorderRadius.circular(24),
                       ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               StreamBuilder<UserAmountModel>(
@@ -228,8 +226,8 @@ class _AddBillScreenState extends State<AddBillScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
+                            const Padding(
+                              padding: EdgeInsets.only(
                                   top: 16, left: 32, bottom: 4),
                               child: Text(
                                 "Amount",
@@ -264,7 +262,7 @@ class _AddBillScreenState extends State<AddBillScreen> {
                                     finalAmount = amount! + currentAmount!;
                                   }),
                                   decoration: InputDecoration(
-                                    errorStyle: TextStyle(fontSize: 0.1),
+                                    errorStyle: const TextStyle(fontSize: 0.1),
                                     fillColor: Colors.grey.shade200,
                                     filled: true,
                                     hintText: "Rs 12,500",
@@ -272,23 +270,23 @@ class _AddBillScreenState extends State<AddBillScreen> {
                                       fontSize: 14,
                                       color: Colors.grey.shade500,
                                     ),
-                                    contentPadding: EdgeInsets.only(left: 12),
+                                    contentPadding: const EdgeInsets.only(left: 12),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Colors.black12),
+                                          const BorderSide(color: Colors.black12),
                                       borderRadius: BorderRadius.circular(24),
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Colors.black12),
+                                          const BorderSide(color: Colors.black12),
                                       borderRadius: BorderRadius.circular(24),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.red),
+                                      borderSide: const BorderSide(color: Colors.red),
                                       borderRadius: BorderRadius.circular(24),
                                     ),
                                     errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.red),
+                                      borderSide: const BorderSide(color: Colors.red),
                                       borderRadius: BorderRadius.circular(24),
                                     ),
                                   ),
@@ -300,8 +298,8 @@ class _AddBillScreenState extends State<AddBillScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
+                            const Padding(
+                              padding: EdgeInsets.only(
                                   top: 16, left: 32, bottom: 4),
                               child: Text(
                                 "Warranty",
@@ -327,7 +325,7 @@ class _AddBillScreenState extends State<AddBillScreen> {
                                     warranty = int.parse(val);
                                   }),
                                   decoration: InputDecoration(
-                                    errorStyle: TextStyle(fontSize: 0.1),
+                                    errorStyle: const TextStyle(fontSize: 0.1),
                                     fillColor: Colors.grey.shade200,
                                     filled: true,
                                     hintText: "5 yrs",
@@ -335,23 +333,23 @@ class _AddBillScreenState extends State<AddBillScreen> {
                                       fontSize: 14,
                                       color: Colors.grey.shade500,
                                     ),
-                                    contentPadding: EdgeInsets.only(left: 12),
+                                    contentPadding: const EdgeInsets.only(left: 12),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Colors.black12),
+                                          const BorderSide(color: Colors.black12),
                                       borderRadius: BorderRadius.circular(24),
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Colors.black12),
+                                          const BorderSide(color: Colors.black12),
                                       borderRadius: BorderRadius.circular(24),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.red),
+                                      borderSide: const BorderSide(color: Colors.red),
                                       borderRadius: BorderRadius.circular(24),
                                     ),
                                     errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.red),
+                                      borderSide: const BorderSide(color: Colors.red),
                                       borderRadius: BorderRadius.circular(24),
                                     ),
                                   ),
@@ -363,8 +361,8 @@ class _AddBillScreenState extends State<AddBillScreen> {
                       ],
                     );
                   }),
-              Padding(
-                padding: const EdgeInsets.only(top: 48, left: 32, bottom: 16),
+              const Padding(
+                padding: EdgeInsets.only(top: 48, left: 32, bottom: 16),
                 child: Text(
                   "Upload Bill",
                   style: TextStyle(fontSize: 14),
@@ -386,7 +384,7 @@ class _AddBillScreenState extends State<AddBillScreen> {
                     child: Center(
                       child: _image != null
                           ? Image.file(_image!)
-                          : Text("Add Image"),
+                          : const Text("Add Image"),
                     ),
                   ),
                 ),
@@ -399,8 +397,8 @@ class _AddBillScreenState extends State<AddBillScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 12, bottom: 4),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 12, bottom: 4),
                           child: Text(
                             "Date",
                             style: TextStyle(fontSize: 14),
@@ -423,7 +421,7 @@ class _AddBillScreenState extends State<AddBillScreen> {
                               _userDate = int.parse(val);
                             }),
                             decoration: InputDecoration(
-                              errorStyle: TextStyle(fontSize: 0.1),
+                              errorStyle: const TextStyle(fontSize: 0.1),
                               fillColor: Colors.grey.shade200,
                               filled: true,
                               hintText: "08",
@@ -431,13 +429,13 @@ class _AddBillScreenState extends State<AddBillScreen> {
                                 fontSize: 14,
                                 color: Colors.grey.shade500,
                               ),
-                              contentPadding: EdgeInsets.only(left: 12),
+                              contentPadding: const EdgeInsets.only(left: 12),
                               focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black12),
+                                borderSide: const BorderSide(color: Colors.black12),
                                 borderRadius: BorderRadius.circular(24),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black12),
+                                borderSide: const BorderSide(color: Colors.black12),
                                 borderRadius: BorderRadius.circular(24),
                               ),
                             ),
@@ -450,8 +448,8 @@ class _AddBillScreenState extends State<AddBillScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 12, bottom: 4),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 12, bottom: 4),
                             child: Text(
                               "Month",
                               style: TextStyle(fontSize: 14),
@@ -474,7 +472,7 @@ class _AddBillScreenState extends State<AddBillScreen> {
                                 _userMonth = int.parse(val);
                               }),
                               decoration: InputDecoration(
-                                errorStyle: TextStyle(fontSize: 0.1),
+                                errorStyle: const TextStyle(fontSize: 0.1),
                                 fillColor: Colors.grey.shade200,
                                 filled: true,
                                 hintText: "11",
@@ -482,13 +480,13 @@ class _AddBillScreenState extends State<AddBillScreen> {
                                   fontSize: 14,
                                   color: Colors.grey.shade500,
                                 ),
-                                contentPadding: EdgeInsets.only(left: 12),
+                                contentPadding: const EdgeInsets.only(left: 12),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black12),
+                                  borderSide: const BorderSide(color: Colors.black12),
                                   borderRadius: BorderRadius.circular(24),
                                 ),
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black12),
+                                  borderSide: const BorderSide(color: Colors.black12),
                                   borderRadius: BorderRadius.circular(24),
                                 ),
                               ),
@@ -500,8 +498,8 @@ class _AddBillScreenState extends State<AddBillScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 12, bottom: 4),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 12, bottom: 4),
                           child: Text(
                             "Year",
                             style: TextStyle(fontSize: 14),
@@ -524,7 +522,7 @@ class _AddBillScreenState extends State<AddBillScreen> {
                               _userYear = int.parse(val);
                             }),
                             decoration: InputDecoration(
-                              errorStyle: TextStyle(fontSize: 0.1),
+                              errorStyle: const TextStyle(fontSize: 0.1),
                               fillColor: Colors.grey.shade200,
                               filled: true,
                               hintText: "2022",
@@ -532,13 +530,13 @@ class _AddBillScreenState extends State<AddBillScreen> {
                                 fontSize: 14,
                                 color: Colors.grey.shade500,
                               ),
-                              contentPadding: EdgeInsets.only(left: 12),
+                              contentPadding: const EdgeInsets.only(left: 12),
                               focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black12),
+                                borderSide: const BorderSide(color: Colors.black12),
                                 borderRadius: BorderRadius.circular(24),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black12),
+                                borderSide: const BorderSide(color: Colors.black12),
                                 borderRadius: BorderRadius.circular(24),
                               ),
                             ),
@@ -555,7 +553,7 @@ class _AddBillScreenState extends State<AddBillScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     isLoading
-                        ? CircularProgressIndicator()
+                        ? const CircularProgressIndicator()
                         : InkWell(
                             onTap: () {
                               addBill(context);
@@ -571,7 +569,7 @@ class _AddBillScreenState extends State<AddBillScreen> {
                                   color: pinkColor,
                                   borderRadius: BorderRadius.circular(32),
                                 ),
-                                child: Center(child: Text("Add Bill")),
+                                child: const Center(child: Text("Add Bill")),
                               ),
                             ),
                           )

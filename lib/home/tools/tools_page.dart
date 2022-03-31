@@ -68,9 +68,10 @@ class ToolsSceen extends StatelessWidget {
                 const SizedBox(height: 30),
                 InkWell(
                   onTap: () {
-                    final time = DateTime.now().millisecondsSinceEpoch;
-                    DatabaseService().updateUserRequestTools(
-                        time, true, tool.name.replaceAll(' ', ''));
+                    DatabaseService().createRequest("Tools", tool.name);
+                    // final time = DateTime.now().millisecondsSinceEpoch;
+                    // DatabaseService().updateUserRequestTools(
+                    //     time, true, tool.name.replaceAll(' ', ''));
 
                     showSimpleAnimatedDialogBox(
                         context, "Request Placed Succesfully", "4.png");

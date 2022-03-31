@@ -41,9 +41,13 @@ class Superviser extends StatelessWidget {
                           context,
                           "A Site Superviser will be appointed within 24 hours",
                           "5.png");
-                      final time = DateTime.now().millisecondsSinceEpoch;
-                      DatabaseService().updateUserRequestSuper(
-                          time, true, snapshot.hasData ? true : false);
+                      DatabaseService().createRequest(
+                        "Supervisor",
+                        snapshot.hasData ? "change" : "appoint",
+                      );
+                      // final time = DateTime.now().millisecondsSinceEpoch;
+                      // DatabaseService().updateUserRequestSuper(
+                      //     time, true, snapshot.hasData ? true : false);
                     },
                     child: Text(
                       snapshot.hasData ? "Change" : "Appoint",

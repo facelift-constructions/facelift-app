@@ -73,14 +73,15 @@ class RoomScreen extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  final time = DateTime.now().millisecondsSinceEpoch;
+                  DatabaseService().createRequest("House Room Photos", name);
+                  // final time = DateTime.now().millisecondsSinceEpoch;
                   // if (name == "House front") {
                   //   name = "House_front";
                   // }
                   showSimpleAnimatedDialogBox(
                       context, "More $name photos will be provided", "3.png");
-                  DatabaseService().updateUserRequestRoom(
-                      time, true, name == "House front" ? "House_front" : name);
+                  // DatabaseService().updateUserRequestRoom(
+                  //     time, true, name == "House front" ? "House_front" : name);
                 },
                 child: Container(
                   width: size.width * 0.7,

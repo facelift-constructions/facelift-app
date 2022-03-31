@@ -79,7 +79,10 @@ class DatabaseService {
       FirebaseFirestore.instance.collection('RequestsRawMaterials').doc(number);
 
   final DocumentReference userComplaintsDoc =
-      FirebaseFirestore.instance.collection('Complaints').doc(number);
+      FirebaseFirestore.instance.collection('Complaints').doc();
+
+  final DocumentReference userRequestsDoc =
+      FirebaseFirestore.instance.collection('Requests').doc();
 
   //-----------------------------------------------------------------------------------------
 
@@ -92,58 +95,71 @@ class DatabaseService {
     }
   }
 
-  Future<bool> checkRequests() async {
-    try {
-      var d = await userRequestsLabor.get();
-      return d.exists;
-    } catch (e) {
-      throw e;
-    }
-  }
+  // Future<bool> checkRequests() async {
+  //   try {
+  //     var d = await userRequestsLabor.get();
+  //     return d.exists;
+  //   } catch (e) {
+  //     throw e;
+  //   }
+  // }
 
-  Future<bool> checkSuperviser() async {
-    try {
-      var d = await userRequestForSuperDoc.get();
-      return d.exists;
-    } catch (e) {
-      throw e;
-    }
-  }
+  // Future<bool> checkSuperviser() async {
+  //   try {
+  //     var d = await userRequestForSuperDoc.get();
+  //     return d.exists;
+  //   } catch (e) {
+  //     throw e;
+  //   }
+  // }
 
-  Future<bool> checkRoomsReq() async {
-    try {
-      var d = await userRequestForRoomDoc.get();
-      return d.exists;
-    } catch (e) {
-      throw e;
-    }
-  }
+  // Future<bool> checkRoomsReq() async {
+  //   try {
+  //     var d = await userRequestForRoomDoc.get();
+  //     return d.exists;
+  //   } catch (e) {
+  //     throw e;
+  //   }
+  // }
 
-  Future<bool> checkRawMatReq() async {
-    try {
-      var d = await userRequestForRawMatDoc.get();
-      return d.exists;
-    } catch (e) {
-      throw e;
-    }
-  }
+  // Future<bool> checkRawMatReq() async {
+  //   try {
+  //     var d = await userRequestForRawMatDoc.get();
+  //     return d.exists;
+  //   } catch (e) {
+  //     throw e;
+  //   }
+  // }
 
-  Future<bool> checkToolsReq() async {
-    try {
-      var d = await userRequestForToolsDoc.get();
-      return d.exists;
-    } catch (e) {
-      throw e;
-    }
-  }
+  // Future<bool> checkToolsReq() async {
+  //   try {
+  //     var d = await userRequestForToolsDoc.get();
+  //     return d.exists;
+  //   } catch (e) {
+  //     throw e;
+  //   }
+  // }
 
-  Future<bool> checkComplaints() async {
-    try {
-      var d = await userComplaintsDoc.get();
-      return d.exists;
-    } catch (e) {
-      throw e;
-    }
+  // Future<bool> checkComplaints() async {
+  //   try {
+  //     var d = await userComplaintsDoc.get();
+  //     return d.exists;
+  //   } catch (e) {
+  //     throw e;
+  //   }
+  // }
+
+  Future<void> createRequest(String type, String name) async {
+    String createdDate = DateTime.now().day.toString();
+    String createdTime = DateTime.now().millisecondsSinceEpoch.toString();
+    return await userRequestsDoc.set({
+      "user_number": number,
+      "site_name": premiumName,
+      "type": type,
+      "get": name,
+      "created_date": createdDate,
+      "time": createdTime,
+    });
   }
 
   Future<void> updateUserData() async {
@@ -237,73 +253,81 @@ class DatabaseService {
     return await userProfileDoc.set({"url": val});
   }
 
-  Future<void> updateUserRequestSuper(int? time, bool b, bool change) async {
-    bool exist = await checkSuperviser();
-    if (exist) {
-      return await userRequestForSuperDoc
-          .update({"time": time, "change": change});
-    } else {
-      return await userRequestForSuperDoc
-          .set({"request": b, "time": time, "change": change});
-    }
-  }
+  // Future<void> updateUserRequestSuper(int? time, bool b, bool change) async {
+  //   bool exist = await checkSuperviser();
+  //   if (exist) {
+  //     return await userRequestForSuperDoc
+  //         .update({"time": time, "change": change});
+  //   } else {
+  //     return await userRequestForSuperDoc
+  //         .set({"request": b, "time": time, "change": change});
+  //   }
+  // }
 
-  Future<void> updateUserRequestLabor(int? time, bool b, String name) async {
-    bool exist = await checkRequests();
-    if (exist) {
-      return await userRequestsLabor.update({"time": time, name: true});
-    } else {
-      return await userRequestsLabor
-          .set({"request": b, "time": time, name: true});
-    }
-  }
+  // Future<void> updateUserRequestLabor(int? time, bool b, String name) async {
+  //   bool exist = await checkRequests();
+  //   if (exist) {
+  //     return await userRequestsLabor.update({"time": time, name: true});
+  //   } else {
+  //     return await userRequestsLabor
+  //         .set({"request": b, "time": time, name: true});
+  //   }
+  // }
 
-  Future<void> updateUserRequestRoom(int? time, bool b, String name) async {
-    bool exist = await checkRoomsReq();
-    if (exist) {
-      return await userRequestForRoomDoc.update({"time": time, name: true});
-    } else {
-      return await userRequestForRoomDoc
-          .set({"request": b, "time": time, name: true});
-    }
-  }
+  // Future<void> updateUserRequestRoom(int? time, bool b, String name) async {
+  //   bool exist = await checkRoomsReq();
+  //   if (exist) {
+  //     return await userRequestForRoomDoc.update({"time": time, name: true});
+  //   } else {
+  //     return await userRequestForRoomDoc
+  //         .set({"request": b, "time": time, name: true});
+  //   }
+  // }
 
-  Future<void> updateUserRequestTools(int? time, bool b, String name) async {
-    bool exist = await checkToolsReq();
-    if (exist) {
-      return await userRequestForToolsDoc.update({"time": time, name: true});
-    } else {
-      return await userRequestForToolsDoc
-          .set({"request": b, "time": time, name: true});
-    }
-  }
+  // Future<void> updateUserRequestTools(int? time, bool b, String name) async {
+  //   bool exist = await checkToolsReq();
+  //   if (exist) {
+  //     return await userRequestForToolsDoc.update({"time": time, name: true});
+  //   } else {
+  //     return await userRequestForToolsDoc
+  //         .set({"request": b, "time": time, name: true});
+  //   }
+  // }
 
-  Future<void> updateUserRequestRawMaterial(
-      int? time, bool b, String name) async {
-    bool exist = await checkRawMatReq();
-    if (exist) {
-      return await userRequestForRawMatDoc.update({"time": time, name: true});
-    } else {
-      return await userRequestForRawMatDoc
-          .set({"request": b, "time": time, name: true});
-    }
-  }
+  // Future<void> updateUserRequestRawMaterial(
+  //     int? time, bool b, String name) async {
+  //   bool exist = await checkRawMatReq();
+  //   if (exist) {
+  //     return await userRequestForRawMatDoc.update({"time": time, name: true});
+  //   } else {
+  //     return await userRequestForRawMatDoc
+  //         .set({"request": b, "time": time, name: true});
+  //   }
+  // }
 
   Future<void> updateUserComplaint(
       int? time, bool b, String name, String skill, String reason) async {
-    bool exist = await checkComplaints();
-    if (exist) {
-      return await userComplaintsDoc.update({
-        "time": time,
-        "${name}_$skill": reason,
-      });
-    } else {
-      return await userComplaintsDoc.set({
-        "request": b,
-        "time": time,
-        "${name}_$skill": reason,
-      });
-    }
+    return await userComplaintsDoc.set({
+      "user_number": number,
+      "site_name": premiumName,
+      "name": name,
+      "skill": skill,
+      "reason": reason,
+      "time": time,
+    });
+    // bool exist = await checkComplaints();
+    // if (exist) {
+    //   return await userComplaintsDoc.update({
+    //     "time": time,
+    //     "${name}_$skill": reason,
+    //   });
+    // } else {
+    //   return await userComplaintsDoc.set({
+    //     "request": b,
+    //     "time": time,
+    //     "${name}_$skill": reason,
+    //   });
+    // }
   }
 
   //--------------------------------------------------------------------------------------------

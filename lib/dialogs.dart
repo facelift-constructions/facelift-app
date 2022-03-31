@@ -118,7 +118,7 @@ Future<void> showSimpleAnimatedDialogBox(
   showAnimatedDialog(
     context: context,
     builder: (BuildContext context) {
-      Future.delayed(Duration(seconds: 3), () {
+      Future.delayed(const Duration(seconds: 3), () {
         Navigator.of(context).pop(true);
       });
       return Dialog(
