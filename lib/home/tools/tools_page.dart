@@ -73,7 +73,7 @@ class ToolsSceen extends StatelessWidget {
                         time, true, tool.name.replaceAll(' ', ''));
 
                     showSimpleAnimatedDialogBox(
-                        context, "Request Placed Succesfully", 3, "4.png");
+                        context, "Request Placed Succesfully", "4.png");
                   },
                   child: Container(
                     height: 45,

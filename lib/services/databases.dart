@@ -19,7 +19,7 @@ class DatabaseService {
       .collection('userData')
       .doc(number)
       .collection('Usr')
-      .doc('premiumData');
+      .doc('premiumForm');
 
   // final DocumentReference userPremiumBool =
   //     FirebaseFirestore.instance.collection('userData').doc(number);
@@ -181,6 +181,21 @@ class DatabaseService {
       "area": area,
       "city": city,
       "state": state,
+    });
+  }
+
+  Future<void> updateUserProgress() async {
+    return await userSiteProgressDoc.set({
+      "percentage": "7",
+      "value": 0.07,
+      "value1": 3,
+      "value2": 2,
+      "value3": 1,
+      "value4": 1,
+      "value5": 1,
+      "value6": 1,
+      "value7": 1,
+      "value8": 1,
     });
   }
 

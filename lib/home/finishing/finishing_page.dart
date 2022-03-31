@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 
 import '../../dialogs.dart';
@@ -14,10 +12,10 @@ class FinishingScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        toolbarHeight: 65,
+        toolbarHeight: 70,
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back_ios_new),
+          icon: const Icon(Icons.arrow_back_ios_new),
         ),
         title: Text(
           id == 0
@@ -33,7 +31,7 @@ class FinishingScreen extends StatelessWidget {
                               : id == 5
                                   ? "Bathroom"
                                   : "Materials",
-          style: TextStyle(color: Colors.black),
+          style: const TextStyle(color: Colors.black),
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -44,6 +42,7 @@ class FinishingScreen extends StatelessWidget {
               // scrollDirection: Axis.horizontal,
               child: Column(
                 children: [
+                  const SizedBox(height: 15),
                   FinishingList(
                     materialList: flooringItalian,
                     name: "Italian Marbles",
@@ -199,11 +198,11 @@ class FinishingList extends StatelessWidget {
             padding: const EdgeInsets.only(left: 16, bottom: 16),
             child: Text(
               name,
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
           ),
           Container(
-            padding: EdgeInsets.only(top: 8, left: 4),
+            padding: const EdgeInsets.only(top: 8, left: 4),
             height: name == "Doors" ? size.width * 0.6 : size.width * 0.5,
             // height: double.maxFinite,
             child: ListView.builder(
@@ -269,11 +268,11 @@ class FinishingPageCard extends StatelessWidget {
                     child: Text(
                       material.name,
                       maxLines: 2,
-                      style: TextStyle(fontSize: 12),
+                      style: const TextStyle(fontSize: 12),
                     ),
                   ),
                 )
-              : SizedBox()
+              : const SizedBox()
         ],
       ),
     );

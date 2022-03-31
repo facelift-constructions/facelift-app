@@ -70,9 +70,9 @@ Future<bool> showExitPopup(BuildContext context) async {
 void showImageDialogBox(BuildContext context, String image, bool net) =>
     showAnimatedDialog(
       barrierDismissible: true,
-      animationType: DialogTransitionType.slideFromBottom,
-      curve: Curves.fastOutSlowIn,
-      duration: const Duration(seconds: 1),
+      animationType: DialogTransitionType.fadeScale,
+      curve: Curves.linear,
+      duration: const Duration(milliseconds: 400),
       context: context,
       builder: (BuildContext context) {
         return Dialog(
@@ -84,9 +84,9 @@ void showImageDialogBox(BuildContext context, String image, bool net) =>
               mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 16, left: 16),
+                  padding: const EdgeInsets.only(top: 8, right: 8),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       InkWell(
                         onTap: () {
@@ -102,7 +102,8 @@ void showImageDialogBox(BuildContext context, String image, bool net) =>
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.only(
+                      top: 8, left: 12, right: 12, bottom: 12),
                   child: net ? Image.network(image) : Image.asset(image),
                 )
               ],
@@ -113,11 +114,11 @@ void showImageDialogBox(BuildContext context, String image, bool net) =>
     );
 
 Future<void> showSimpleAnimatedDialogBox(
-    BuildContext context, String name, int duration, String image) async {
+    BuildContext context, String name, String image) async {
   showAnimatedDialog(
     context: context,
     builder: (BuildContext context) {
-      Future.delayed(Duration(seconds: duration), () {
+      Future.delayed(Duration(seconds: 3), () {
         Navigator.of(context).pop(true);
       });
       return Dialog(

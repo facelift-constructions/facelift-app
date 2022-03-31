@@ -65,7 +65,7 @@ class LaborScreen extends StatelessWidget {
                         .updateUserRequestLabor(time, true, labor.name);
                   }
                   showSimpleAnimatedDialogBox(
-                      context, "A ${labor.name} will be apointed", 3, "1.png");
+                      context, "A ${labor.name} will be apointed", "1.png");
                 },
                 child: Container(
                   height: 45,

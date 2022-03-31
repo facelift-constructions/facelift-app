@@ -1,7 +1,8 @@
-import 'package:facelift_constructions/dialogs.dart';
-import 'package:facelift_constructions/services/databases.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import '../dialogs.dart';
+import '../services/databases.dart';
 import '../constants.dart';
 
 class NewPrimiumUserScreen extends StatefulWidget {
@@ -69,6 +70,7 @@ class _NewPrimiumUserScreenState extends State<NewPrimiumUserScreen> {
       showAnimatedDialogBox(
           context, "Congratulations!", false, 3, "2.png", false, 1);
       await DatabaseService().updateUserPremium(true);
+      await DatabaseService().updateUserProgress();
       await DatabaseService().updateUserPremiumData(
         capitalize(premiumName),
         houseLength,

@@ -77,8 +77,8 @@ class RoomScreen extends StatelessWidget {
                   // if (name == "House front") {
                   //   name = "House_front";
                   // }
-                  showSimpleAnimatedDialogBox(context,
-                      "More $name photos will be provided", 3, "3.png");
+                  showSimpleAnimatedDialogBox(
+                      context, "More $name photos will be provided", "3.png");
                   DatabaseService().updateUserRequestRoom(
                       time, true, name == "House front" ? "House_front" : name);
                 },

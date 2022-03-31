@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:facelift_constructions/models/raw.dart';
 import 'package:flutter/material.dart';
 
@@ -14,19 +12,15 @@ class RawSceen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    double w = 110;
-    double h = 100;
-    if (size.width < 350) {
-      w = 90;
-      h = 80;
-    }
+    double w = size.width * 0.27;
+    double h = size.width * 0.26;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 65,
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back_ios_new),
+          icon: const Icon(Icons.arrow_back_ios_new),
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -49,7 +43,7 @@ class RawSceen extends StatelessWidget {
             ),
             Text(
               material.name,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w400,
               ),
@@ -59,57 +53,54 @@ class RawSceen extends StatelessWidget {
               child: Text(
                 material.description,
                 textAlign: TextAlign.start,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w300,
                 ),
               ),
             ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Image.asset(
-                        material.p1,
-                        height: h,
-                        width: w,
-                        fit: BoxFit.cover,
-                      ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.asset(
+                      material.p1,
+                      height: h,
+                      width: w,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Image.asset(
-                        material.p2,
-                        height: h,
-                        width: w,
-                        fit: BoxFit.cover,
-                      ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.asset(
+                      material.p2,
+                      height: h,
+                      width: w,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Image.asset(
-                        material.p3,
-                        height: h,
-                        width: w,
-                        fit: BoxFit.cover,
-                      ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.asset(
+                      material.p3,
+                      height: h,
+                      width: w,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             InkWell(
               onTap: () {
@@ -120,7 +111,6 @@ class RawSceen extends StatelessWidget {
                 showSimpleAnimatedDialogBox(
                     context,
                     "Best in quality ${material.name} will be provided",
-                    3,
                     "7.png");
               },
               child: Container(
@@ -133,7 +123,7 @@ class RawSceen extends StatelessWidget {
                 child: Center(child: Text("Get ${material.name}")),
               ),
             ),
-            SizedBox(height: 10)
+            const SizedBox(height: 10)
             // Padding(
             //   padding: EdgeInsets.all(32),
             //   child: GetPremiumButton(),

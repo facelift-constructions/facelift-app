@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:facelift_constructions/constants.dart';
-import 'package:facelift_constructions/services/databases.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 
 import '../services/auth_service.dart';
+import '../constants.dart';
+import '../services/databases.dart';
 
 class PhoneAuthScreen extends StatefulWidget {
   const PhoneAuthScreen({Key? key}) : super(key: key);
@@ -95,7 +95,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                   child: TextFormField(
                     keyboardType: TextInputType.name,
                     inputFormatters: <TextInputFormatter>[
-                      LengthLimitingTextInputFormatter(15)
+                      LengthLimitingTextInputFormatter(20)
                     ],
                     cursorColor: Colors.black,
                     onChanged: (val) => newName = val,
@@ -105,7 +105,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                         fontSize: 16,
                         color: Colors.grey.shade500,
                       ),
-                      contentPadding: const EdgeInsets.only(left: 12),
+                      contentPadding: const EdgeInsets.only(left: 16),
                       border: OutlineInputBorder(
                         borderSide: const BorderSide(color: Colors.black12),
                         borderRadius: BorderRadius.circular(24),
@@ -236,17 +236,19 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
         children: [
           Icon(
             Icons.circle,
-            size: rev ? 16 : 12,
+            size: rev ? 10 : 6,
             color: pinkColor,
           ),
+          const SizedBox(width: 4),
           Icon(
             Icons.circle,
-            size: rev ? 14 : 14,
+            size: rev ? 8 : 8,
             color: pinkColor,
           ),
+          const SizedBox(width: 4),
           Icon(
             Icons.circle,
-            size: rev ? 12 : 16,
+            size: rev ? 6 : 10,
             color: pinkColor,
           ),
         ],

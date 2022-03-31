@@ -40,7 +40,6 @@ class Superviser extends StatelessWidget {
                       showSimpleAnimatedDialogBox(
                           context,
                           "A Site Superviser will be appointed within 24 hours",
-                          5,
                           "5.png");
                       final time = DateTime.now().millisecondsSinceEpoch;
                       DatabaseService().updateUserRequestSuper(
