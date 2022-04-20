@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:otp_text_field/style.dart';
@@ -182,7 +183,14 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                   child: isLoading
                       ? const CircularProgressIndicator()
                       : InkWell(
-                          onTap: () {
+                          onTap: () async {
+                            try {
+                              await FirebaseAnalytics.instance.logEvent(
+                                  name: 'Otp_entered',
+                                  parameters: {
+                                    'phone_number': phoneController.text
+                                  });
+                            } catch (e) {}
                             setState(() {
                               isLoading = true;
                             });
@@ -367,6 +375,10 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                   onTap: wait
                       ? () => showSnackBar(context, "Wait for timer to finish")
                       : () async {
+                          await FirebaseAnalytics.instance
+                              .logEvent(name: 'otp_requested', parameters: {
+                            'number': phoneController.text,
+                          });
                           showSnackBarDuration(context, "Redirecting...", 5);
                           startTimer();
                           setState(() {
