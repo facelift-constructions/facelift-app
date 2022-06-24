@@ -24,6 +24,7 @@ var userLogedIn = false;
 var userName = "";
 var userMobile = 0;
 String? number = "0";
+String? userUid = "";
 String userrName = "";
 var screens = [const PofileScreen(), const HomeScreen(), const PremiumScreen()];
 bool crossClick = false;

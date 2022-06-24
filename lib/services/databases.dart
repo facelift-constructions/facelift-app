@@ -9,17 +9,20 @@ class DatabaseService {
   final CollectionReference userCol =
       FirebaseFirestore.instance.collection('userData');
 
-  final DocumentReference userData = FirebaseFirestore.instance
-      .collection('userData')
-      .doc(number)
-      .collection('Usr')
-      .doc('userData');
+  // final DocumentReference userData = FirebaseFirestore.instance
+  //     .collection('userData')
+  //     .doc(number)
+  //     .collection('Usr')
+  //     .doc('userData');
 
   final DocumentReference userPremiumDoc = FirebaseFirestore.instance
       .collection('userData')
       .doc(number)
       .collection('Usr')
       .doc('premiumForm');
+
+  final DocumentReference userPremiumDocCRM =
+      FirebaseFirestore.instance.collection('premiumData').doc(number);
 
   // final DocumentReference userPremiumBool =
   //     FirebaseFirestore.instance.collection('userData').doc(number);
@@ -95,91 +98,43 @@ class DatabaseService {
     }
   }
 
-  // Future<bool> checkRequests() async {
-  //   try {
-  //     var d = await userRequestsLabor.get();
-  //     return d.exists;
-  //   } catch (e) {
-  //     throw e;
-  //   }
-  // }
-
-  // Future<bool> checkSuperviser() async {
-  //   try {
-  //     var d = await userRequestForSuperDoc.get();
-  //     return d.exists;
-  //   } catch (e) {
-  //     throw e;
-  //   }
-  // }
-
-  // Future<bool> checkRoomsReq() async {
-  //   try {
-  //     var d = await userRequestForRoomDoc.get();
-  //     return d.exists;
-  //   } catch (e) {
-  //     throw e;
-  //   }
-  // }
-
-  // Future<bool> checkRawMatReq() async {
-  //   try {
-  //     var d = await userRequestForRawMatDoc.get();
-  //     return d.exists;
-  //   } catch (e) {
-  //     throw e;
-  //   }
-  // }
-
-  // Future<bool> checkToolsReq() async {
-  //   try {
-  //     var d = await userRequestForToolsDoc.get();
-  //     return d.exists;
-  //   } catch (e) {
-  //     throw e;
-  //   }
-  // }
-
-  // Future<bool> checkComplaints() async {
-  //   try {
-  //     var d = await userComplaintsDoc.get();
-  //     return d.exists;
-  //   } catch (e) {
-  //     throw e;
-  //   }
-  // }
-
   Future<void> createRequest(String type, String name) async {
-    String createdDate = DateTime.now().day.toString();
-    String createdTime = DateTime.now().millisecondsSinceEpoch.toString();
+    final time = DateTime.now();
     return await userRequestsDoc.set({
       "user_number": number,
       "site_name": premiumName,
       "type": type,
       "get": name,
-      "created_date": createdDate,
-      "time": createdTime,
+      "created_date": "${time.day}/${time.month}",
+      "time": time.millisecondsSinceEpoch,
     });
   }
 
   Future<void> updateUserData() async {
     bool exist = await checkUser();
     if (exist) {
-      return await userCol.doc(number).update({"phone": number});
+      return await userCol.doc(number).update({
+        "phone": number,
+        "uid": userUid,
+      });
     } else {
-      return await userCol
-          .doc(number)
-          .set({"name": "new User", "phone": number});
+      return await userCol.doc(number).set({
+        "name": "new User",
+        "phone": number,
+        "uid": userUid,
+      });
     }
   }
 
   Future<void> updateUserProfil(
       String? name, String? email, String? city, String? state) async {
+    final time = DateTime.now();
     return await userCol.doc(number).update({
       "name": name,
       "email": email,
       "city": city,
       "state": state,
+      "last_login": "${time.day}/${time.month}/${time.year}"
     });
   }
 
@@ -197,6 +152,21 @@ class DatabaseService {
       "area": area,
       "city": city,
       "state": state,
+    });
+  }
+
+  Future<void> updateUserPremiumDataCRM(String name, int len, int bre, int area,
+      String valueChose, String city, String state) async {
+    return await userPremiumDoc.set({
+      "name": name,
+      "front": len,
+      "back": bre,
+      "type": valueChose,
+      "area": area,
+      "city": city,
+      "state": state,
+      "number": number,
+      "uid": userUid
     });
   }
 
@@ -253,58 +223,6 @@ class DatabaseService {
     return await userProfileDoc.set({"url": val});
   }
 
-  // Future<void> updateUserRequestSuper(int? time, bool b, bool change) async {
-  //   bool exist = await checkSuperviser();
-  //   if (exist) {
-  //     return await userRequestForSuperDoc
-  //         .update({"time": time, "change": change});
-  //   } else {
-  //     return await userRequestForSuperDoc
-  //         .set({"request": b, "time": time, "change": change});
-  //   }
-  // }
-
-  // Future<void> updateUserRequestLabor(int? time, bool b, String name) async {
-  //   bool exist = await checkRequests();
-  //   if (exist) {
-  //     return await userRequestsLabor.update({"time": time, name: true});
-  //   } else {
-  //     return await userRequestsLabor
-  //         .set({"request": b, "time": time, name: true});
-  //   }
-  // }
-
-  // Future<void> updateUserRequestRoom(int? time, bool b, String name) async {
-  //   bool exist = await checkRoomsReq();
-  //   if (exist) {
-  //     return await userRequestForRoomDoc.update({"time": time, name: true});
-  //   } else {
-  //     return await userRequestForRoomDoc
-  //         .set({"request": b, "time": time, name: true});
-  //   }
-  // }
-
-  // Future<void> updateUserRequestTools(int? time, bool b, String name) async {
-  //   bool exist = await checkToolsReq();
-  //   if (exist) {
-  //     return await userRequestForToolsDoc.update({"time": time, name: true});
-  //   } else {
-  //     return await userRequestForToolsDoc
-  //         .set({"request": b, "time": time, name: true});
-  //   }
-  // }
-
-  // Future<void> updateUserRequestRawMaterial(
-  //     int? time, bool b, String name) async {
-  //   bool exist = await checkRawMatReq();
-  //   if (exist) {
-  //     return await userRequestForRawMatDoc.update({"time": time, name: true});
-  //   } else {
-  //     return await userRequestForRawMatDoc
-  //         .set({"request": b, "time": time, name: true});
-  //   }
-  // }
-
   Future<void> updateUserComplaint(
       int? time, bool b, String name, String skill, String reason) async {
     return await userComplaintsDoc.set({
@@ -315,19 +233,6 @@ class DatabaseService {
       "reason": reason,
       "time": time,
     });
-    // bool exist = await checkComplaints();
-    // if (exist) {
-    //   return await userComplaintsDoc.update({
-    //     "time": time,
-    //     "${name}_$skill": reason,
-    //   });
-    // } else {
-    //   return await userComplaintsDoc.set({
-    //     "request": b,
-    //     "time": time,
-    //     "${name}_$skill": reason,
-    //   });
-    // }
   }
 
   //--------------------------------------------------------------------------------------------

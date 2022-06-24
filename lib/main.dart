@@ -32,10 +32,12 @@ class _MyAppState extends State<MyApp> {
 
   checkLogin() async {
     String? tokne = await authClass.getPhone();
+    String? uid = await authClass.getUid();
     if (tokne != null) {
       setState(() {
         userLogedIn = true;
         number = tokne;
+        userUid = uid;
       });
     }
   }

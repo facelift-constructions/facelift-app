@@ -17,6 +17,7 @@ class _NewPrimiumUserScreenState extends State<NewPrimiumUserScreen> {
     "New House",
     "Renovation",
     "Not a house",
+    "Farm house",
     "Something else"
   ];
   List statesItems = [
@@ -72,6 +73,15 @@ class _NewPrimiumUserScreenState extends State<NewPrimiumUserScreen> {
       await DatabaseService().updateUserPremium(true);
       await DatabaseService().updateUserProgress();
       await DatabaseService().updateUserPremiumData(
+        capitalize(premiumName),
+        houseLength,
+        houseWidth,
+        houseSize,
+        valueChose,
+        capitalize(premiumCity),
+        stateChose,
+      );
+      await DatabaseService().updateUserPremiumDataCRM(
         capitalize(premiumName),
         houseLength,
         houseWidth,
