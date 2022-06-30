@@ -16,8 +16,8 @@ class _NewPrimiumUserScreenState extends State<NewPrimiumUserScreen> {
   List dropDownItems = [
     "New House",
     "Renovation",
-    "Not a house",
     "Farm house",
+    "Not a house",
     "Something else"
   ];
   List statesItems = [

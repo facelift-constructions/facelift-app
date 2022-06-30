@@ -97,6 +97,7 @@ class AuthClass {
       print(user);
       storeTokenAndData(userCredential, context);
       number = await getPhone();
+      userUid = await getUid();
       // number = "+917973112165";
       // await DatabaseService()
       //     .updateUserData(userrName == "" ? "new user" : userrName);

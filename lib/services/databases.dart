@@ -157,7 +157,7 @@ class DatabaseService {
 
   Future<void> updateUserPremiumDataCRM(String name, int len, int bre, int area,
       String valueChose, String city, String state) async {
-    return await userPremiumDoc.set({
+    return await userPremiumDocCRM.set({
       "name": name,
       "front": len,
       "back": bre,

@@ -30,6 +30,14 @@
           }
         },
         {
+          "client_id": "819574419259-mdct9f5rna16ea0hob40tn8nv97ha6sk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.facelift.constructions",
+            "certificate_hash": "8c3554ed26c97081fbea54745703e64fdb0ab28e"
+          }
+        },
+        {
           "client_id": "819574419259-sgrrkqftkm158lr52ohccju089s15dre.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
