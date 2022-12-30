@@ -30,6 +30,14 @@
           }
         },
         {
+          "client_id": "819574419259-m1hb7pstvqqcoi1p49i8pv13mr85cjof.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.facelift.constructions",
+            "certificate_hash": "1be493b52e0c1ceddc37ebb7e99aaef564e3b9ad"
+          }
+        },
+        {
           "client_id": "819574419259-mdct9f5rna16ea0hob40tn8nv97ha6sk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -46,7 +54,7 @@
           }
         },
         {
-          "client_id": "819574419259-5geu9mqkbbbbsh75lj68rnupsghp6j98.apps.googleusercontent.com",
+          "client_id": "819574419259-3te8j6hf8dk6n2aicpsmg8cl03afjlkv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -59,7 +67,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "819574419259-5geu9mqkbbbbsh75lj68rnupsghp6j98.apps.googleusercontent.com",
+              "client_id": "819574419259-3te8j6hf8dk6n2aicpsmg8cl03afjlkv.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

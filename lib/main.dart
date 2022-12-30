@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
 import 'models/models.dart';
 import 'services/auth_service.dart';
@@ -26,6 +27,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+    FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+    analytics.logEvent(name: 'app_start');
     super.initState();
     checkLogin();
   }
