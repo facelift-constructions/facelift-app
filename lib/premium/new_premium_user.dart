@@ -81,15 +81,6 @@ class _NewPrimiumUserScreenState extends State<NewPrimiumUserScreen> {
         capitalize(premiumCity),
         stateChose,
       );
-      await DatabaseService().updateUserPremiumDataCRM(
-        capitalize(premiumName),
-        houseLength,
-        houseWidth,
-        houseSize,
-        valueChose,
-        capitalize(premiumCity),
-        stateChose,
-      );
     }
   }
 

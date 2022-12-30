@@ -7,7 +7,7 @@ import '../models/models.dart';
 
 class DatabaseService {
   final CollectionReference userCol =
-      FirebaseFirestore.instance.collection('userData');
+      FirebaseFirestore.instance.collection('NewUserData');
 
   // final DocumentReference userData = FirebaseFirestore.instance
   //     .collection('userData')
@@ -15,11 +15,8 @@ class DatabaseService {
   //     .collection('Usr')
   //     .doc('userData');
 
-  final DocumentReference userPremiumDoc = FirebaseFirestore.instance
-      .collection('userData')
-      .doc(number)
-      .collection('Usr')
-      .doc('premiumForm');
+  final DocumentReference userPremiumDoc =
+      FirebaseFirestore.instance.collection('NewPremiumData').doc(userUid);
 
   final DocumentReference userPremiumDocCRM =
       FirebaseFirestore.instance.collection('premiumData').doc(number);
@@ -28,58 +25,58 @@ class DatabaseService {
   //     FirebaseFirestore.instance.collection('userData').doc(number);
 
   final CollectionReference userHousePlan = FirebaseFirestore.instance
-      .collection('userData')
-      .doc(number)
+      .collection('NewUserData')
+      .doc(userUid)
       .collection('housePlan');
 
   final CollectionReference userLaborer = FirebaseFirestore.instance
-      .collection('userData')
-      .doc(number)
+      .collection('NewUserData')
+      .doc(userUid)
       .collection('laborer');
 
   final CollectionReference userHousebill = FirebaseFirestore.instance
-      .collection('userData')
-      .doc(number)
+      .collection('NewUserData')
+      .doc(userUid)
       .collection('houseBills');
 
   final DocumentReference userHousebillAmount = FirebaseFirestore.instance
-      .collection('userData')
-      .doc(number)
+      .collection('NewUserData')
+      .doc(userUid)
       .collection('Usr')
       .doc('amount');
 
   final DocumentReference userProfileDoc = FirebaseFirestore.instance
-      .collection('userData')
-      .doc(number)
+      .collection('NewUserData')
+      .doc(userUid)
       .collection('Usr')
       .doc('profilePic');
 
   final DocumentReference userSiteSuperviserDoc = FirebaseFirestore.instance
-      .collection('userData')
-      .doc(number)
+      .collection('NewUserData')
+      .doc(userUid)
       .collection('Usr')
       .doc('supervisor');
 
   final DocumentReference userSiteProgressDoc = FirebaseFirestore.instance
-      .collection('userData')
-      .doc(number)
+      .collection('NewUserData')
+      .doc(userUid)
       .collection('Usr')
       .doc('progress');
 
   final DocumentReference userRequestsLabor =
-      FirebaseFirestore.instance.collection('RequestsLabor').doc(number);
+      FirebaseFirestore.instance.collection('RequestsLabor').doc(userUid);
 
   final DocumentReference userRequestForSuperDoc =
-      FirebaseFirestore.instance.collection('RequestsSupervisor').doc(number);
+      FirebaseFirestore.instance.collection('RequestsSupervisor').doc(userUid);
 
   final DocumentReference userRequestForRoomDoc =
-      FirebaseFirestore.instance.collection('RequestsRooms').doc(number);
+      FirebaseFirestore.instance.collection('RequestsRooms').doc(userUid);
 
   final DocumentReference userRequestForToolsDoc =
-      FirebaseFirestore.instance.collection('RequestsTools').doc(number);
+      FirebaseFirestore.instance.collection('RequestsTools').doc(userUid);
 
   final DocumentReference userRequestForRawMatDoc =
-      FirebaseFirestore.instance.collection('RequestsRawMaterials').doc(number);
+      FirebaseFirestore.instance.collection('RequestsRawMaterials').doc(userUid);
 
   final DocumentReference userComplaintsDoc =
       FirebaseFirestore.instance.collection('Complaints').doc();
@@ -91,7 +88,7 @@ class DatabaseService {
 
   Future<bool> checkUser() async {
     try {
-      var d = await userCol.doc(number).get();
+      var d = await userCol.doc(userUid).get();
       return d.exists;
     } catch (e) {
       throw e;
@@ -105,7 +102,7 @@ class DatabaseService {
       "site_name": premiumName,
       "type": type,
       "get": name,
-      "created_date": "${time.day}/${time.month}",
+      "created_date": "${time.day}/${time.month}/${time.year}",
       "time": time.millisecondsSinceEpoch,
     });
   }
@@ -113,12 +110,12 @@ class DatabaseService {
   Future<void> updateUserData() async {
     bool exist = await checkUser();
     if (exist) {
-      return await userCol.doc(number).update({
+      return await userCol.doc(userUid).update({
         "phone": number,
         "uid": userUid,
       });
     } else {
-      return await userCol.doc(number).set({
+      return await userCol.doc(userUid).set({
         "name": "new User",
         "phone": number,
         "uid": userUid,
@@ -129,7 +126,7 @@ class DatabaseService {
   Future<void> updateUserProfil(
       String? name, String? email, String? city, String? state) async {
     final time = DateTime.now();
-    return await userCol.doc(number).update({
+    return await userCol.doc(userUid).update({
       "name": name,
       "email": email,
       "city": city,
@@ -139,7 +136,7 @@ class DatabaseService {
   }
 
   Future<void> updateUserPremium(bool val) async {
-    return await userCol.doc(number).update({"premium": val});
+    return await userCol.doc(userUid).update({"premium": val});
   }
 
   Future<void> updateUserPremiumData(String name, int len, int bre, int area,
@@ -155,20 +152,20 @@ class DatabaseService {
     });
   }
 
-  Future<void> updateUserPremiumDataCRM(String name, int len, int bre, int area,
-      String valueChose, String city, String state) async {
-    return await userPremiumDocCRM.set({
-      "name": name,
-      "front": len,
-      "back": bre,
-      "type": valueChose,
-      "area": area,
-      "city": city,
-      "state": state,
-      "number": number,
-      "uid": userUid
-    });
-  }
+  // Future<void> updateUserPremiumDataCRM(String name, int len, int bre, int area,
+  //     String valueChose, String city, String state) async {
+  //   return await userPremiumDocCRM.set({
+  //     "name": name,
+  //     "front": len,
+  //     "back": bre,
+  //     "type": valueChose,
+  //     "area": area,
+  //     "city": city,
+  //     "state": state,
+  //     "number": number,
+  //     "uid": userUid
+  //   });
+  // }
 
   Future<void> updateUserProgress() async {
     return await userSiteProgressDoc.set({
@@ -303,12 +300,12 @@ class DatabaseService {
   //-------------------------------------------------------------------------------------
 
   Stream<Uuser> get userDataStream {
-    return userCol.doc(number).snapshots().map(_userDataFromSnapshot);
+    return userCol.doc(userUid).snapshots().map(_userDataFromSnapshot);
   }
 
   Stream<UserPremiumBool> get userPremiumBoolStream {
     return userCol
-        .doc(number)
+        .doc(userUid)
         .snapshots()
         .map(_userPremiumBoolDataFromSnapshot);
   }
