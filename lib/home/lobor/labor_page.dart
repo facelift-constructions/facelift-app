@@ -8,6 +8,7 @@ import '../../services/databases.dart';
 class LaborScreen extends StatelessWidget {
   final Labor labor;
   const LaborScreen({Key? key, required this.labor}) : super(key: key);
+  
 
   @override
   Widget build(BuildContext context) {

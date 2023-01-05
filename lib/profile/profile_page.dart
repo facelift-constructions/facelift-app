@@ -116,7 +116,13 @@ class _PofileScreenState extends State<PofileScreen> {
                       children: [
                         const SizedBox(height: 50),
                         const ProfilePic(),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 5),
+                        const Text(
+                          "Upload Photo",
+                          style: TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.w300),
+                        ),
+                        const SizedBox(height: 2),
                         Text("Hi ${snapshot.data!.name},"),
                         const SizedBox(height: 20),
                         ProfileMenu(
@@ -127,6 +133,22 @@ class _PofileScreenState extends State<PofileScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         const AccountsScreen()));
+                          },
+                          isTrue: false,
+                        ),
+                        ProfileMenu(
+                          name: "Frequently Asked Questions",
+                          press: () {
+                            _launchUrl(
+                                'https://www.facelift.construction/faqs');
+                          },
+                          isTrue: false,
+                        ),
+                        ProfileMenu(
+                          name: "Instagram",
+                          press: () {
+                            _launchUrl(
+                                'https://www.instagram.com/facelift.constructions/');
                           },
                           isTrue: false,
                         ),
@@ -142,10 +164,17 @@ class _PofileScreenState extends State<PofileScreen> {
                           isTrue: false,
                         ),
                         ProfileMenu(
-                          name: "FAQs & How to use",
+                          name: "Website",
+                          press: () {
+                            _launchUrl('https://www.facelift.construction/');
+                          },
+                          isTrue: false,
+                        ),
+                        ProfileMenu(
+                          name: "More Options",
                           press: () {
                             _launchUrl(
-                                'https://www.facelift.construction/faqs');
+                                'https://www.facelift.construction/menu');
                           },
                           isTrue: false,
                         ),
@@ -155,6 +184,11 @@ class _PofileScreenState extends State<PofileScreen> {
                             showLogoutPopup();
                           },
                           isTrue: false,
+                        ),
+                        const Text(
+                          "Facelift Constructions Pvt. Ltd.",
+                          style: TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.w300),
                         ),
                       ],
                     ),

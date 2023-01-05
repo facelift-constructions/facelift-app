@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
       extendBody: true,
       bottomNavigationBar: Padding(
         padding:
-            EdgeInsets.symmetric(vertical: 16, horizontal: size.width * 0.225),
+            EdgeInsets.symmetric(vertical: 24, horizontal: size.width * 0.225),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(30),
           child: BottomNavigationBar(

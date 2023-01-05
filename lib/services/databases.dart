@@ -18,50 +18,38 @@ class DatabaseService {
   final DocumentReference userPremiumDoc =
       FirebaseFirestore.instance.collection('NewPremiumData').doc(userUid);
 
-  final DocumentReference userPremiumDocCRM =
-      FirebaseFirestore.instance.collection('premiumData').doc(number);
+  // final DocumentReference userPremiumDocCRM =
+  //     FirebaseFirestore.instance.collection('premiumData').doc(number);
 
   // final DocumentReference userPremiumBool =
   //     FirebaseFirestore.instance.collection('userData').doc(number);
 
   final CollectionReference userHousePlan = FirebaseFirestore.instance
-      .collection('NewUserData')
+      .collection('housePlan')
       .doc(userUid)
-      .collection('housePlan');
+      .collection('photos');
 
   final CollectionReference userLaborer = FirebaseFirestore.instance
-      .collection('NewUserData')
+      .collection('laborer')
       .doc(userUid)
-      .collection('laborer');
+      .collection('labor');
 
   final CollectionReference userHousebill = FirebaseFirestore.instance
-      .collection('NewUserData')
+      .collection('houseBills')
       .doc(userUid)
-      .collection('houseBills');
+      .collection('bills');
 
-  final DocumentReference userHousebillAmount = FirebaseFirestore.instance
-      .collection('NewUserData')
-      .doc(userUid)
-      .collection('Usr')
-      .doc('amount');
+  final DocumentReference userHousebillAmount =
+      FirebaseFirestore.instance.collection('amount').doc(userUid);
 
-  final DocumentReference userProfileDoc = FirebaseFirestore.instance
-      .collection('NewUserData')
-      .doc(userUid)
-      .collection('Usr')
-      .doc('profilePic');
+  final DocumentReference userProfileDoc =
+      FirebaseFirestore.instance.collection('profilePic').doc(userUid);
 
-  final DocumentReference userSiteSuperviserDoc = FirebaseFirestore.instance
-      .collection('NewUserData')
-      .doc(userUid)
-      .collection('Usr')
-      .doc('supervisor');
+  final DocumentReference userSiteSuperviserDoc =
+      FirebaseFirestore.instance.collection('supervisor').doc(userUid);
 
-  final DocumentReference userSiteProgressDoc = FirebaseFirestore.instance
-      .collection('NewUserData')
-      .doc(userUid)
-      .collection('Usr')
-      .doc('progress');
+  final DocumentReference userSiteProgressDoc =
+      FirebaseFirestore.instance.collection('progress').doc(userUid);
 
   final DocumentReference userRequestsLabor =
       FirebaseFirestore.instance.collection('RequestsLabor').doc(userUid);
@@ -75,14 +63,15 @@ class DatabaseService {
   final DocumentReference userRequestForToolsDoc =
       FirebaseFirestore.instance.collection('RequestsTools').doc(userUid);
 
-  final DocumentReference userRequestForRawMatDoc =
-      FirebaseFirestore.instance.collection('RequestsRawMaterials').doc(userUid);
+  final DocumentReference userRequestForRawMatDoc = FirebaseFirestore.instance
+      .collection('RequestsRawMaterials')
+      .doc(userUid);
 
   final DocumentReference userComplaintsDoc =
       FirebaseFirestore.instance.collection('Complaints').doc();
 
   final DocumentReference userRequestsDoc =
-      FirebaseFirestore.instance.collection('Requests').doc();
+      FirebaseFirestore.instance.collection('NewRequests').doc();
 
   //-----------------------------------------------------------------------------------------
 
@@ -105,6 +94,7 @@ class DatabaseService {
       "get": name,
       "created_date": "${time.day}/${time.month}/${time.year}",
       "time": time.millisecondsSinceEpoch,
+      "premium user": premiumUser,
     });
   }
 
@@ -150,6 +140,8 @@ class DatabaseService {
       "area": area,
       "city": city,
       "state": state,
+      "uid": userUid,
+      "phone": number
     });
   }
 

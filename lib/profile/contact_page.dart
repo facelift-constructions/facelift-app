@@ -25,8 +25,7 @@ class ContactScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios_new),
         ),
-        title: const Text("Contact Options",
-            style: TextStyle(color: Colors.black)),
+        title: const Text("Contact", style: TextStyle(color: Colors.black)),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         iconTheme: const IconThemeData(color: Colors.black54),
@@ -36,9 +35,16 @@ class ContactScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 50),
             ProfileMenu(
-              name: "Phone Number",
+              name: "Call",
               press: () {
                 _launchUrl('tel:7207225725');
+              },
+              isTrue: true,
+            ),
+            ProfileMenu(
+              name: "WhatsApp",
+              press: () {
+                _launchUrl('https://wa.aisensy.com/qHBN8K');
               },
               isTrue: true,
             ),
@@ -46,13 +52,6 @@ class ContactScreen extends StatelessWidget {
               name: "Email",
               press: () {
                 _launchUrl('mailto:contact@facelift.com');
-              },
-              isTrue: true,
-            ),
-            ProfileMenu(
-              name: "Website",
-              press: () {
-                _launchUrl('https://www.facelift.construction');
               },
               isTrue: true,
             ),

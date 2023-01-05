@@ -14,6 +14,7 @@ class RoomScreen extends StatelessWidget {
   const RoomScreen({Key? key, required this.photos, required this.name})
       : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     bool _net = false;

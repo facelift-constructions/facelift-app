@@ -34,11 +34,11 @@ class ProfileMenu extends StatelessWidget {
           children: [
             isTrue
                 ? Image.asset(
-                    name == "Phone Number"
+                    name == "Call"
                         ? "assets/images/phone.png"
                         : name == "Email"
                             ? "assets/images/email.png"
-                            : "assets/images/web.png",
+                            : "assets/images/whatsapp.png",
                     width: 22,
                   )
                 : const SizedBox(),
