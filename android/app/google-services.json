@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "819574419259-7rd2iloibh39pgf4sm2ekd65kmu6m2di.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.facelift.constructions",
+            "certificate_hash": "9278346e82e1020acac516bc2638e42b36edaa05"
+          }
+        },
+        {
           "client_id": "819574419259-hkuv5vs9k3v91nbapcg6vdidoa2o2um3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
