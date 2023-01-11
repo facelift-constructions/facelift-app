@@ -20,7 +20,7 @@ class GetPremiumButton extends StatelessWidget {
         height: 40,
         decoration: BoxDecoration(
             color: Color(0xffff72b9), borderRadius: BorderRadius.circular(32)),
-        child: Center(child: Text("Get Premium for free")),
+        child: Center(child: Text("Get Premium")),
       ),
     );
   }
