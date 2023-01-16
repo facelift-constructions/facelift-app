@@ -1,11 +1,11 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-import 'models/models.dart';
 import 'services/auth_service.dart';
 import '../constants.dart';
-import 'services/databases.dart';
 import 'log_in/welcome.dart';
 import 'premium/new_premium_user.dart';
 
@@ -39,12 +39,11 @@ class _MyAppState extends State<MyApp> {
             .collection('NewPremiumData')
             .doc(userUid)
             .get();
-
-        if (tokenP != null) {
+        if (tokenP.exists) {
           premiumUser = true;
         }
       } catch (e) {
-        print(e);
+        log(e.toString());
       }
       setState(() {});
     }
@@ -58,34 +57,11 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    if (userLogedIn == true) {
-      return StreamBuilder<UserPremiumBool>(
-        stream: DatabaseService().userPremiumBoolStream,
-        builder: (context, snapshot) {
-          if (snapshot.hasData && userLogedIn == true) {
-            premiumUser = snapshot.data!.premium;
-            return const MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: 'Facelift Constructions',
-              home: HomePage(),
-            );
-          } else {
-            return const MaterialApp(
-              debugShowCheckedModeBanner: false,
-              home: Scaffold(
-                body: Center(child: CircularProgressIndicator()),
-              ),
-            );
-          }
-        },
-      );
-    } else {
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Facelift Constructions',
-        home: userLogedIn ? WelcomeScreen() : Scaffold(),
-      );
-    }
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Facelift Constructions',
+      home: userLogedIn ? HomePage() : WelcomeScreen(),
+    );
   }
 }
 

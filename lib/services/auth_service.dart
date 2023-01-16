@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, prefer_function_declarations_over_variables, prefer_const_constructors
+import 'dart:developer';
 
 import 'package:facelift_constructions/constants.dart';
 import 'package:facelift_constructions/main.dart';
@@ -9,7 +9,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AuthClass {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   Future<void> signOut({required BuildContext context}) async {
     try {
@@ -24,17 +24,17 @@ class AuthClass {
 
   void storeTokenAndData(
       UserCredential userCredential, BuildContext context) async {
-    print("storing token and data");
+    log("storing token and data");
     await storage.write(
       key: "phone",
       value: userCredential.user?.phoneNumber.toString(),
     );
-    print(userCredential.user?.phoneNumber.toString());
+    // print(userCredential.user?.phoneNumber.toString());
     await storage.write(
       key: "uid",
       value: userCredential.user?.uid,
     );
-    print(userCredential.user?.uid.toString());
+    // print(userCredential.user?.uid.toString());
     await storage.write(
       key: "usercredential",
       value: userCredential.toString(),
@@ -55,26 +55,22 @@ class AuthClass {
 
   Future<void> verifyPhoneNumber(
       String phoneNumber, BuildContext context, Function setData) async {
-    PhoneVerificationCompleted verificationCompleted =
-        (PhoneAuthCredential phoneAuthCredential) async {
+    verificationCompleted(PhoneAuthCredential phoneAuthCredential) async {
       showSnackBar(context, "Verification Completed");
-    };
-    PhoneVerificationFailed verificationFailed =
-        (FirebaseAuthException exception) {
+    }
+    verificationFailed(FirebaseAuthException exception) {
       showSnackBar(context, exception.toString());
-    };
-    PhoneCodeSent codeSent =
-        (String verificationID, [int? forceResnedingtoken]) {
+    }
+    codeSent(String verificationID, [int? forceResnedingtoken]) {
       showSnackBar(context, "Verification Code sent on the phone number");
       setData(verificationID);
-    };
-    PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
-        (String verificationID) {
+    }
+    codeAutoRetrievalTimeout(String verificationID) {
       showSnackBar(context, "Time out");
-    };
+    }
     try {
       await _auth.verifyPhoneNumber(
-        timeout: Duration(seconds: 120),
+        timeout: const Duration(seconds: 120),
         phoneNumber: phoneNumber,
         verificationCompleted: verificationCompleted,
         verificationFailed: verificationFailed,
@@ -93,8 +89,8 @@ class AuthClass {
           verificationId: verificationId, smsCode: smsCode);
       UserCredential userCredential =
           await _auth.signInWithCredential(authCredential);
-      User? user = userCredential.user;
-      print(user);
+      // User? user = userCredential.user;
+      // print(user);
       storeTokenAndData(userCredential, context);
       number = await getPhone();
       userUid = await getUid();
@@ -107,16 +103,12 @@ class AuthClass {
       //     .updatePremiumPage("name", 0, 0, 0, "valueChose", false);
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => MyApp()),
+        MaterialPageRoute(builder: (context) => const MyApp()),
         (route) => false,
       );
     } catch (e) {
       showSnackBar(context, e.toString());
+      isLoading = false;
     }
   }
-
-  // void showSnackBar(BuildContext context, String text) {
-  //   final snackBar = SnackBar(content: Text(text));
-  //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  // }
 }

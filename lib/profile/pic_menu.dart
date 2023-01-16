@@ -23,7 +23,7 @@ class ProfileMenu extends StatelessWidget {
       child: TextButton(
         style: TextButton.styleFrom(
           // primary: kPrimaryColor,
-          primary: const Color(0xffff72b9),
+          foregroundColor: const Color(0xffff72b9),
           padding: const EdgeInsets.all(20),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
@@ -87,7 +87,7 @@ class ProfilePic extends StatelessWidget {
                           borderRadius: BorderRadius.circular(50),
                           side: const BorderSide(color: Colors.white),
                         ),
-                        primary: Colors.white,
+                        foregroundColor: Colors.white,
                         backgroundColor: const Color(0xFFF5F6F9),
                       ),
                       onPressed: () {

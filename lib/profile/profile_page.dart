@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
-
 import 'package:facelift_constructions/log_in/welcome.dart';
 import 'package:facelift_constructions/profile/accounts_page.dart';
 import 'package:facelift_constructions/profile/contact_page.dart';
@@ -22,9 +20,9 @@ class PofileScreen extends StatefulWidget {
 
 class _PofileScreenState extends State<PofileScreen> {
   _launchUrl(String siteUrl) async {
-    final url = siteUrl;
-    if (await canLaunch(url)) {
-      await launch(url);
+    final url = Uri.parse(siteUrl);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
     } else {
       throw 'Could not launch $url';
     }

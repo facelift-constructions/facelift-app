@@ -7,13 +7,17 @@ class ContactScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     _launchUrl(String siteUrl) async {
-      final url = siteUrl;
-      if (await canLaunch(url)) {
-        await launch(url);
+
+      final url = Uri.parse(siteUrl);
+
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url, mode: siteUrl=="https://wa.aisensy.com/qHBN8K"? LaunchMode.externalApplication: LaunchMode.platformDefault);
       } else {
         throw 'Could not launch $url';
       }
+
     }
 
     return Scaffold(

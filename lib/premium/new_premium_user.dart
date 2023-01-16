@@ -65,6 +65,7 @@ class _NewPrimiumUserScreenState extends State<NewPrimiumUserScreen> {
   moveToNextScreen(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
       setState(() {
+        premiumUser = true;
         iindex = 2;
       });
       // showSimpleAnimatedDialogBox(context, "name", 3, "2.png");

@@ -28,7 +28,6 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
   String newName = "newUser";
   var codeChose = "+91";
   bool vis = false;
-  bool isLoading = false;
   List countryCodes = [
     "+1",
     "+20",
@@ -184,13 +183,6 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                       ? const CircularProgressIndicator()
                       : InkWell(
                           onTap: () async {
-                            try {
-                              await FirebaseAnalytics.instance.logEvent(
-                                  name: 'Otp_entered',
-                                  parameters: {
-                                    'phone_number': phoneController.text
-                                  });
-                            } catch (e) {}
                             setState(() {
                               isLoading = true;
                             });
@@ -200,14 +192,18 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                                 .whenComplete(
                                   () => DatabaseService()
                                       .updateUserProfil(
-                                        newName == ""
-                                            ? "New User"
-                                            : capitalize(newName),
-                                        "",
-                                        "",
-                                        "",
-                                      )
-                                      .whenComplete(() => isLoading = false),
+                                    newName == ""
+                                        ? "New User"
+                                        : capitalize(newName),
+                                    "",
+                                    "",
+                                    "",
+                                  )
+                                      .whenComplete(() {
+                                    setState(() {
+                                      isLoading = false;
+                                    });
+                                  }),
                                 );
                           },
                           child: Container(

@@ -28,6 +28,7 @@ String? userUid = "";
 String userrName = "";
 var screens = [const PofileScreen(), const HomeScreen(), const PremiumScreen()];
 bool crossClick = false;
+bool isLoading = false;
 
 String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
 

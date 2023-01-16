@@ -2,6 +2,8 @@ import 'package:facelift_constructions/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../dialogs.dart';
+import '../models/models.dart';
+import '../services/databases.dart';
 import 'finishing/finishing_list.dart';
 import 'lobor/labor_list.dart';
 import 'raw/raw_list.dart';
@@ -16,7 +18,6 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({
     Key? key,
   }) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -82,9 +83,15 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 FinishingList(size: size),
-                premiumUser == false
-                    ? PremiumWidget(size: size, s: size.width > 330)
-                    : const SizedBox(),
+                StreamBuilder<UserPremiumBool>(
+                    stream: DatabaseService().userPremiumBoolStream,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData && snapshot.data!.premium == false) {
+                        return PremiumWidget(size: size, s: size.width > 330);
+                      } else {
+                        return SizedBox();
+                      }
+                    }),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
                   child: Text(

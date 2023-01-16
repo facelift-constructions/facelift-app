@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
@@ -19,24 +20,32 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   void initState() {
-    super.initState();
     Timer.periodic(const Duration(milliseconds: 1500), (Timer timer) {
       if (currentPage < 2) {
-        currentPage++;
-        pageController.animateToPage(
-          currentPage,
-          duration: const Duration(milliseconds: 350),
-          curve: Curves.easeIn,
-        );
+        try {
+          currentPage++;
+          pageController.animateToPage(
+            currentPage,
+            duration: const Duration(milliseconds: 350),
+            curve: Curves.easeIn,
+          );
+        } catch (e) {
+          log(e.toString());
+        }
       } else {
-        currentPage = 0;
-        pageController.animateToPage(
-          currentPage,
-          duration: const Duration(milliseconds: 350),
-          curve: Curves.easeIn,
-        );
+        try {
+          currentPage = 0;
+          pageController.animateToPage(
+            currentPage,
+            duration: const Duration(milliseconds: 350),
+            curve: Curves.easeIn,
+          );
+        } catch (e) {
+          log(e.toString());
+        }
       }
     });
+    super.initState();
   }
 
   @override
