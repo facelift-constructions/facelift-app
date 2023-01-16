@@ -1,6 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 
 import 'models/models.dart';
 import 'services/auth_service.dart';
@@ -25,14 +25,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   AuthClass authClass = AuthClass();
 
-  @override
-  void initState() {
-    FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-    analytics.logEvent(name: 'app_start');
-    super.initState();
-    checkLogin();
-  }
-
   checkLogin() async {
     String? tokne = await authClass.getPhone();
     String? uid = await authClass.getUid();
@@ -42,18 +34,31 @@ class _MyAppState extends State<MyApp> {
         number = tokne;
         userUid = uid;
       });
+      try {
+        var tokenP = await FirebaseFirestore.instance
+            .collection('NewPremiumData')
+            .doc(userUid)
+            .get();
+
+        if (tokenP != null) {
+          premiumUser = true;
+        }
+      } catch (e) {
+        print(e);
+      }
+      setState(() {});
     }
   }
 
   @override
+  void initState() {
+    checkLogin();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (userLogedIn != true) {
-      return const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Facelift Constructions',
-        home: WelcomeScreen(),
-      );
-    } else {
+    if (userLogedIn == true) {
       return StreamBuilder<UserPremiumBool>(
         stream: DatabaseService().userPremiumBoolStream,
         builder: (context, snapshot) {
@@ -73,6 +78,12 @@ class _MyAppState extends State<MyApp> {
             );
           }
         },
+      );
+    } else {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Facelift Constructions',
+        home: userLogedIn ? WelcomeScreen() : Scaffold(),
       );
     }
   }

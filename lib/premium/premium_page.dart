@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:facelift_constructions/constants.dart';
 import 'package:facelift_constructions/premium/new_premium_user.dart';
 import 'package:facelift_constructions/services/databases.dart';
@@ -11,8 +12,15 @@ import 'sample_laborer/sample_laborer_list.dart';
 import 'superviser_widget.dart';
 import 'user_house_plan/plan_list.dart';
 
-class PremiumScreen extends StatelessWidget {
+class PremiumScreen extends StatefulWidget {
   const PremiumScreen({Key? key}) : super(key: key);
+
+  @override
+  State<PremiumScreen> createState() => _PremiumScreenState();
+}
+
+class _PremiumScreenState extends State<PremiumScreen> {
+  
 
   @override
   Widget build(BuildContext context) {
