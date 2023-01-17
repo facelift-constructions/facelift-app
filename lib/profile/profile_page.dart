@@ -188,6 +188,12 @@ class _PofileScreenState extends State<PofileScreen> {
                           style: TextStyle(
                               fontSize: 12, fontWeight: FontWeight.w300),
                         ),
+                        const SizedBox(height: 5),
+                        const Text(
+                          "v3.0.1+15",
+                          style: TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.w300),
+                        ),
                       ],
                     ),
                   ),
