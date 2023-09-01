@@ -28,11 +28,13 @@ class _MyAppState extends State<MyApp> {
   checkLogin() async {
     String? tokne = await authClass.getPhone();
     String? uid = await authClass.getUid();
+    String? userName1 = await authClass.getName();
     if (tokne != null) {
       setState(() {
         userLogedIn = true;
         number = tokne;
         userUid = uid;
+        userName = userName1!;
       });
       try {
         var tokenP = await FirebaseFirestore.instance

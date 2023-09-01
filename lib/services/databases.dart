@@ -88,6 +88,7 @@ class DatabaseService {
     final time = DateTime.now();
     return await userRequestsDoc.set({
       "uid": userUid,
+      'user_name': userName,
       "user_number": number,
       "site_name": premiumName,
       "type": type,

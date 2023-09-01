@@ -16,6 +16,7 @@ class AuthClass {
       await _auth.signOut();
       await storage.delete(key: "phone");
       await storage.delete(key: "uid");
+      await storage.delete(key: "user_name");
       await storage.delete(key: "usercredential");
     } catch (e) {
       showSnackBar(context, e.toString());
@@ -23,7 +24,7 @@ class AuthClass {
   }
 
   void storeTokenAndData(
-      UserCredential userCredential, BuildContext context) async {
+      UserCredential userCredential, BuildContext context, String name) async {
     log("storing token and data");
     await storage.write(
       key: "phone",
@@ -33,6 +34,10 @@ class AuthClass {
     await storage.write(
       key: "uid",
       value: userCredential.user?.uid,
+    );
+    await storage.write(
+      key: "user_name",
+      value: name,
     );
     // print(userCredential.user?.uid.toString());
     await storage.write(
@@ -47,6 +52,10 @@ class AuthClass {
 
   Future<String?> getUid() async {
     return await storage.read(key: "uid");
+  }
+
+  Future<String?> getName() async {
+    return await storage.read(key: "user_name");
   }
 
   Future<String?> getPhone() async {
@@ -83,7 +92,7 @@ class AuthClass {
   }
 
   Future<void> signInwithPhoneNumber(
-      String verificationId, String smsCode, BuildContext context) async {
+      String verificationId, String smsCode, BuildContext context, String name) async {
     try {
       AuthCredential authCredential = PhoneAuthProvider.credential(
           verificationId: verificationId, smsCode: smsCode);
@@ -91,7 +100,7 @@ class AuthClass {
           await _auth.signInWithCredential(authCredential);
       // User? user = userCredential.user;
       // print(user);
-      storeTokenAndData(userCredential, context);
+      storeTokenAndData(userCredential, context, name);
       number = await getPhone();
       userUid = await getUid();
       // number = "+917973112165";

@@ -188,7 +188,12 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                             });
                             authClass
                                 .signInwithPhoneNumber(
-                                    verificationIdFinal, smsCode, context)
+                                    verificationIdFinal,
+                                    smsCode,
+                                    context,
+                                    newName == ""
+                                        ? "New User"
+                                        : capitalize(newName))
                                 .whenComplete(
                                   () => DatabaseService()
                                       .updateUserProfil(
@@ -371,10 +376,6 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                   onTap: wait
                       ? () => showSnackBar(context, "Wait for timer to finish")
                       : () async {
-                          await FirebaseAnalytics.instance
-                              .logEvent(name: 'otp_requested', parameters: {
-                            'number': phoneController.text,
-                          });
                           showSnackBarDuration(context, "Redirecting...", 5);
                           startTimer();
                           setState(() {
