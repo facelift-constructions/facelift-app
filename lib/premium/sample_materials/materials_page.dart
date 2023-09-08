@@ -595,10 +595,13 @@ class _MaterialsPageState extends State<MaterialsPage> {
           children: [
             SizedBox(
               width: size.width,
-              child: Text(
-                name,
-                style: const TextStyle(fontSize: 16),
-                textAlign: TextAlign.start,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                child: Text(
+                  name,
+                  style: const TextStyle(fontSize: 16),
+                  textAlign: TextAlign.start,
+                ),
               ),
             ),
             SizedBox(
@@ -616,19 +619,19 @@ class _MaterialsPageState extends State<MaterialsPage> {
                     "Used",
                     '$u',
                     size,
-                    pinkColor,
+                    c2,
                   ),
                   cell(
                     "Required",
                     '$r',
                     size,
-                    progressYellow,
+                    c3,
                   ),
                   cell(
                     "Remarks",
                     remarks,
                     size,
-                    progressGrey,
+                    c4,
                   ),
                 ],
               ),
@@ -641,7 +644,7 @@ class _MaterialsPageState extends State<MaterialsPage> {
 
   Widget cell(String name, String val, Size size, Color color) {
     return Container(
-      height: 70,
+      height: 60,
       width: size.width * 0.23,
       decoration: BoxDecoration(
         color: color,

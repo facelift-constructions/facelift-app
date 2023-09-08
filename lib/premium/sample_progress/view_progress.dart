@@ -55,7 +55,7 @@ class ViewProgress extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
-                    'Note :- This section would start functioning once you start construction your home',
+                    'Note :- This section updates daily with Your House Construction\'s progress',
                     style: TextStyle(fontSize: 12, color: Colors.grey),
                   ),
                 )

@@ -74,7 +74,9 @@ class RoomScreen extends StatelessWidget {
                                       ? "Design spacious dressing room with Facelift"
                                       : name == "House front"
                                           ? "Design a unique house front with Facelift"
-                                          : "",
+                                          : name == "Exciting Elements"
+                                              ? "Facelift believes in enhancing liveability and functionality of your house"
+                                              : "",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                 ),
@@ -82,14 +84,8 @@ class RoomScreen extends StatelessWidget {
               InkWell(
                 onTap: () {
                   DatabaseService().createRequest("House Room Photos", name);
-                  // final time = DateTime.now().millisecondsSinceEpoch;
-                  // if (name == "House front") {
-                  //   name = "House_front";
-                  // }
                   showSimpleAnimatedDialogBox(
                       context, "More $name photos will be provided", "3.png");
-                  // DatabaseService().updateUserRequestRoom(
-                  //     time, true, name == "House front" ? "House_front" : name);
                 },
                 child: Container(
                   width: size.width * 0.7,
