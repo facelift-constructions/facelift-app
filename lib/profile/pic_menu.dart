@@ -43,7 +43,19 @@ class ProfileMenu extends StatelessWidget {
                   )
                 : const SizedBox(),
             const SizedBox(width: 20),
-            Expanded(child: Text(name)),
+            Expanded(
+                child: name == 'Call'
+                    ? Row(
+                        children: [
+                          Text(name),
+                          const SizedBox(width: 12),
+                          const Text(
+                            '(+91 72072-25725)',
+                            style: TextStyle(color: Colors.grey, fontSize: 12),
+                          ),
+                        ],
+                      )
+                    : Text(name)),
             const Icon(Icons.arrow_forward_ios),
           ],
         ),

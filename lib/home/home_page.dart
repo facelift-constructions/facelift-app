@@ -1,4 +1,4 @@
-import 'package:facelift_constructions/constants.dart';
+import 'package:facelift_constructions/profile/contact_page.dart';
 import 'package:flutter/material.dart';
 
 import '../dialogs.dart';
@@ -89,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                       if (snapshot.hasData && snapshot.data!.premium == false) {
                         return PremiumWidget(size: size, s: size.width > 330);
                       } else {
-                        return SizedBox();
+                        return const SizedBox();
                       }
                     }),
                 const Padding(
@@ -101,15 +101,23 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const GreenSpaces(),
                 const SizedBox(height: 10),
-                SizedBox(
-                  width: size.width,
-                  height: 50,
-                  // decoration: const BoxDecoration(color: Colors.black),
-                  child: const Center(
-                    child: Text(
-                      "That's all in this section",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.grey),
+                InkWell(
+                  onTap: () => Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ContactScreen()),
+                    (route) => false,
+                  ),
+                  child: SizedBox(
+                    width: size.width,
+                    height: 50,
+                    // decoration: const BoxDecoration(color: Colors.black),
+                    child: const Center(
+                      child: Text(
+                        "That's all in this section",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.grey),
+                      ),
                     ),
                   ),
                 ),

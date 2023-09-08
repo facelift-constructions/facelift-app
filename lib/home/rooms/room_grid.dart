@@ -43,12 +43,20 @@ class RoomGrid extends StatelessWidget {
         const SizedBox(height: 8),
         RowofRoomCard(
           name1: "Dressing",
-          image1: "assets/room/dressing.jpg",
+          image1: "assets/room/dressing.png",
           photos1: dressing_photos,
           size: size,
           name2: "House front",
-          image2: "assets/room/house.jpg",
+          image2: "assets/room/house.png",
           photos2: front_photos,
+          s: s,
+        ),
+        const SizedBox(height: 8),
+        RoomCard(
+          size: size,
+          name: 'Exciting Elements',
+          image: 'assets/room/elements.png',
+          photos: elements,
           s: s,
         ),
       ],
@@ -144,14 +152,23 @@ class RoomCard extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
-                    child: SizedBox(
-                      width: s ? size.width * 0.4 : size.width * 0.43,
-                      height: s ? size.height * 0.16 : size.height * 0.18,
-                      child: Image.asset(
-                        image,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                    child: name == 'Exciting Elements'
+                        ? SizedBox(
+                            width: s ? size.width * 0.8 : size.width * 0.9,
+                            height: s ? size.height * 0.16 : size.height * 0.18,
+                            child: Image.asset(
+                              image,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                        : SizedBox(
+                            width: s ? size.width * 0.4 : size.width * 0.43,
+                            height: s ? size.height * 0.16 : size.height * 0.18,
+                            child: Image.asset(
+                              image,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                   ),
                 ),
                 Padding(

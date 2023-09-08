@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:facelift_constructions/log_in/premium_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -29,6 +30,12 @@ class _MyAppState extends State<MyApp> {
     String? tokne = await authClass.getPhone();
     String? uid = await authClass.getUid();
     String? userName1 = await authClass.getName();
+    String? skip = await storage.read(key: "skip");
+    if (skip == 'true') {
+      setState(() {
+        skipped = true;
+      });
+    }
     if (tokne != null) {
       setState(() {
         userLogedIn = true;
@@ -62,7 +69,13 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Facelift Constructions',
-      home: userLogedIn ? HomePage() : WelcomeScreen(),
+      home: userLogedIn
+          ? premiumUser
+              ? const HomePage()
+              : skipped
+                  ? const HomePage()
+                  : const NewPrimiumUserPop()
+          : const WelcomeScreen(),
     );
   }
 }
@@ -90,7 +103,10 @@ class _HomePageState extends State<HomePage> {
             type: BottomNavigationBarType.fixed,
             unselectedItemColor: Colors.white,
             selectedItemColor: Colors.black,
-            showSelectedLabels: false,
+            showSelectedLabels: true,
+            selectedLabelStyle:
+                const TextStyle(color: Colors.black, fontSize: 10),
+            unselectedLabelStyle: const TextStyle(color: Colors.white),
             showUnselectedLabels: false,
             backgroundColor: pinkColor,
             currentIndex: iindex,
@@ -110,15 +126,15 @@ class _HomePageState extends State<HomePage> {
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle),
-                label: "",
+                label: "Profile",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.architecture),
+                label: "Dashboard",   
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
-                label: "",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.whatshot),
-                label: "",
+                label: "My Home",
               ),
             ],
           ),

@@ -1,5 +1,6 @@
 import 'package:facelift_constructions/constants.dart';
 import 'package:facelift_constructions/premium/new_premium_user.dart';
+import 'package:facelift_constructions/premium/sample_progress/sample_progress_list.dart';
 import 'package:facelift_constructions/services/databases.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +20,6 @@ class PremiumScreen extends StatefulWidget {
 }
 
 class _PremiumScreenState extends State<PremiumScreen> {
-  
-
   @override
   Widget build(BuildContext context) {
     if (premiumUser) {
@@ -54,8 +53,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
                           style: TextStyle(fontSize: 16, color: pinkColor),
                         ),
                         const SizedBox(height: 30),
-                        const HousePlansList(),
                         const Superviser(),
+                        const HousePlansList(),
                         const SampleLaborerList(),
                         Padding(
                           padding: const EdgeInsets.symmetric(
@@ -89,36 +88,41 @@ class _PremiumScreenState extends State<PremiumScreen> {
                           ),
                         ),
                         StreamBuilder<UserProgressModel>(
-                            stream: DatabaseService().userProgressStream,
-                            builder: (context, snapshot) {
-                              return Column(
-                                children: [
-                                  SizedBox(
-                                    height: 120,
-                                    width: 120,
-                                    child: Stack(
-                                      fit: StackFit.expand,
-                                      children: [
-                                        CircularProgressIndicator(
-                                          value: snapshot.hasData
-                                              ? snapshot.data!.overAllvalue
-                                              : 0.07,
-                                          valueColor:
-                                              AlwaysStoppedAnimation(pinkColor),
-                                          strokeWidth: 20,
-                                          backgroundColor: Colors.grey[400],
-                                        ),
-                                        Center(
-                                          child: Text(snapshot.hasData
-                                              ? "${snapshot.data!.percentage}%"
-                                              : "7%"),
-                                        )
-                                      ],
-                                    ),
+                          stream: DatabaseService().userProgressStream,
+                          builder: (context, snapshot) {
+                            return Column(
+                              children: [
+                                SizedBox(
+                                  height: 120,
+                                  width: 120,
+                                  child: Stack(
+                                    fit: StackFit.expand,
+                                    children: [
+                                      CircularProgressIndicator(
+                                        value: snapshot.hasData
+                                            ? snapshot.data!.overAllvalue
+                                            : 0.07,
+                                        valueColor:
+                                            AlwaysStoppedAnimation(pinkColor),
+                                        strokeWidth: 20,
+                                        backgroundColor: Colors.grey[400],
+                                      ),
+                                      Center(
+                                        child: Text(snapshot.hasData
+                                            ? "${snapshot.data!.percentage}%"
+                                            : "7%"),
+                                      )
+                                    ],
                                   ),
-                                ],
-                              );
-                            }),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 24),
+                          child: SampleProgressList(),
+                        ),
                         const SampleBillsList(),
                         Padding(
                           padding: const EdgeInsets.symmetric(

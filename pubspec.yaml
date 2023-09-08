@@ -79,6 +79,7 @@ flutter:
     - assets/sample_plans/
     - assets/sample_labor/
     - assets/sample_bills/
+    - assets/sample_progress/
     - assets/room/
     - assets/labor/
     - assets/tools/

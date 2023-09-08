@@ -20,7 +20,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   void initState() {
-    Timer.periodic(const Duration(milliseconds: 1500), (Timer timer) {
+    if (pageController.hasClients) {
+      Timer.periodic(const Duration(milliseconds: 1500), (Timer timer) {
       if (currentPage < 2) {
         try {
           currentPage++;
@@ -45,6 +46,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         }
       }
     });
+    }
     super.initState();
   }
 

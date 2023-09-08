@@ -127,12 +127,13 @@ class DatabaseService {
     });
   }
 
+
   Future<void> updateUserPremium(bool val) async {
     return await userCol.doc(userUid).update({"premium": val});
   }
 
   Future<void> updateUserPremiumData(String name, int len, int bre, int area,
-      String valueChose, String city, String state) async {
+      String? valueChose, String city, String state) async {
     return await userPremiumDoc.set({
       "name": name,
       "front": len,
@@ -210,6 +211,11 @@ class DatabaseService {
     return await userHousebillAmount.set({"total": amount});
   }
 
+  Future<void> updateUserSupervisor(String? name, age, image) async {
+    return await userSiteSuperviserDoc
+        .set({"name": name, "age": age, "image": image});
+  }
+
   Future<void> updateUserProfilePic(String? val) async {
     return await userProfileDoc.set({"url": val});
   }
@@ -244,11 +250,12 @@ class DatabaseService {
   Uuser _userDataFromSnapshot(DocumentSnapshot snap) {
     Map<String, dynamic> dat = snap.data() as Map<String, dynamic>;
     return Uuser(
-        name: dat["name"] ?? "new user",
-        phone: dat["phone"] ?? number,
-        email: dat["email"] ?? "",
-        city: dat["city"] ?? "",
-        state: dat["state"] ?? "");
+      name: dat["name"] ?? "new user",
+      phone: dat["phone"] ?? number,
+      email: dat["email"] ?? "",
+      city: dat["city"] ?? "",
+      state: dat["state"] ?? "",
+    );
   }
 
   UserPremiumBool _userPremiumBoolDataFromSnapshot(DocumentSnapshot snap) {
@@ -258,16 +265,20 @@ class DatabaseService {
 
   UserProfilePicModel _userProfilePicFromSnapshot(DocumentSnapshot snap) {
     Map<String, dynamic> dat = snap.data() as Map<String, dynamic>;
-    return UserProfilePicModel(url: dat["url"] ?? "");
+    return UserProfilePicModel(
+        url: dat["url"] ??
+            "https://cdn.searchenginejournal.com/wp-content/uploads/2019/08/c573bf41-6a7c-4927-845c-4ca0260aad6b-760x400.jpeg");
   }
 
   SuperviserModel _userSuperviseFromSnapshot(DocumentSnapshot snap) {
     Map<String, dynamic> dat = snap.data() as Map<String, dynamic>;
+
     return SuperviserModel(
-        name: dat["name"] ?? "name",
-        age: dat["age"] ?? "age",
-        image: dat["image"] ??
-            "https://cdn.searchenginejournal.com/wp-content/uploads/2019/08/c573bf41-6a7c-4927-845c-4ca0260aad6b-760x400.jpeg");
+      name: dat["name"] ?? "name",
+      age: dat["age"] ?? "age",
+      image: dat["image"] ??
+          'https://cdn.searchenginejournal.com/wp-content/uploads/2019/08/c573bf41-6a7c-4927-845c-4ca0260aad6b-760x400.jpeg',
+    );
   }
 
   UserProgressModel _userProgressFromSnapshot(DocumentSnapshot snapshot) {
@@ -287,7 +298,7 @@ class DatabaseService {
   }
 
   UserAmountModel _userAmountFromSnapshot(DocumentSnapshot snap) {
-    Map<String, dynamic> dat = snap.data() as Map<String, dynamic>;
+    Map<String?, dynamic> dat = snap.data() as Map<String?, dynamic>;
     return UserAmountModel(total: dat["total"] ?? 0);
   }
 

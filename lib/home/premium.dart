@@ -36,7 +36,7 @@ class PremiumWidget extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Text(
-                    "Premium",
+                    "Design Your Home",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 32,

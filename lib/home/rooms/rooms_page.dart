@@ -2,6 +2,7 @@
 
 import 'package:facelift_constructions/constants.dart';
 import 'package:facelift_constructions/models/room.dart';
+import 'package:facelift_constructions/profile/contact_page.dart';
 import 'package:facelift_constructions/services/databases.dart';
 import 'package:flutter/material.dart';
 
@@ -14,12 +15,16 @@ class RoomScreen extends StatelessWidget {
   const RoomScreen({Key? key, required this.photos, required this.name})
       : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     bool _net = false;
+    bool _showName = false;
     if (name == "House front") {
       _net = true;
+    }
+    if (name == "Exciting Elements") {
+      _net = true;
+      _showName = true;
     }
     Size size = MediaQuery.of(context).size;
     return SafeArea(
@@ -31,7 +36,8 @@ class RoomScreen extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
             icon: Icon(Icons.arrow_back_ios_new),
           ),
-          title: Text("$name Photos", style: TextStyle(color: Colors.black)),
+          title: Text(_showName ? "$name" : "$name Photos",
+              style: TextStyle(color: Colors.black)),
           centerTitle: true,
           backgroundColor: Colors.transparent,
           iconTheme: const IconThemeData(color: Colors.black54),
@@ -48,6 +54,7 @@ class RoomScreen extends StatelessWidget {
                   size: size,
                   photos: photos,
                   net: _net,
+                  showName: _showName,
                 ),
               ),
               SizedBox(height: 10),
@@ -93,6 +100,26 @@ class RoomScreen extends StatelessWidget {
                   child: Center(child: Text("See More Photos")),
                 ),
               ),
+              SizedBox(height: 8),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ContactScreen()));
+                },
+                child: Container(
+                  width: size.width * 0.7,
+                  padding: EdgeInsets.symmetric(vertical: 12),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: pinkColor),
+                      color: pinkColor,
+                      borderRadius: BorderRadius.circular(32)),
+                  child: Center(
+                    child: Text("Contact Now"),
+                  ),
+                ),
+              ),
               SizedBox(height: 30),
             ],
           ),
@@ -105,12 +132,14 @@ class RoomScreen extends StatelessWidget {
 class PhotoBox extends StatelessWidget {
   final RoomPhotos photo;
   final bool net;
+  final bool showName;
   const PhotoBox({
     Key? key,
     required this.photo,
     required this.size,
     required this.photos,
     required this.net,
+    required this.showName,
   }) : super(key: key);
 
   final List<RoomPhotos> photos;
@@ -119,22 +148,52 @@ class PhotoBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding:
+          EdgeInsets.symmetric(horizontal: 12, vertical: showName ? 12 : 8),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
-        child: net
-            ? Image.network(
-                photo.image,
-                fit: BoxFit.cover,
-                height: size.height * 0.5,
-                width: size.width,
-              )
-            : Image.asset(
-                photo.image,
-                fit: BoxFit.cover,
-                height: size.height * 0.5,
-                width: size.width,
+        child: Container(
+          padding: EdgeInsets.only(top: showName ? 16 : 0),
+          color: showName ? Colors.black12 : Colors.transparent,
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: net
+                    ? Image.network(
+                        photo.image,
+                        fit: BoxFit.cover,
+                        height: size.height * 0.5,
+                        width: showName ? size.width * 0.85 : size.width,
+                      )
+                    : Image.asset(
+                        photo.image,
+                        fit: BoxFit.cover,
+                        height: size.height * 0.5,
+                        width: size.width,
+                      ),
               ),
+              showName
+                  ? Padding(
+                      padding: EdgeInsets.only(
+                          top: 8, left: showName ? 24 : 8, bottom: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            photo.id,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : const SizedBox()
+            ],
+          ),
+        ),
       ),
     );
   }

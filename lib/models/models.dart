@@ -20,6 +20,12 @@ class UserPremiumBool {
   UserPremiumBool({required this.premium});
 }
 
+class UserSkipBool {
+  final bool skip;
+
+  UserSkipBool({required this.skip});
+}
+
 class PremiumDataModel {
   final String houseName;
   final int length;

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:intl/intl.dart';
 
 import 'home/home_page.dart';
@@ -13,7 +14,7 @@ var progressYellow = const Color(0xFFFFC000);
 var progressGrey = Colors.grey.shade400;
 var premiumUser = false;
 var iindex = 1;
-var valueChose;
+String? valueChose;
 var stateChose;
 var premiumName = "";
 var premiumCity = "";
@@ -29,6 +30,9 @@ String userrName = "";
 var screens = [const PofileScreen(), const HomeScreen(), const PremiumScreen()];
 bool crossClick = false;
 bool isLoading = false;
+bool skipped = false;
+
+const storage = FlutterSecureStorage();
 
 String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
 

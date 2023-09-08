@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:otp_text_field/style.dart';
@@ -72,7 +71,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                     const Text(
                       "Sign Up",
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 24,
                         fontWeight: FontWeight.w600,
                         color: Colors.grey,
                       ),
@@ -194,22 +193,24 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                                     newName == ""
                                         ? "New User"
                                         : capitalize(newName))
-                                .whenComplete(
-                                  () => DatabaseService()
-                                      .updateUserProfil(
-                                    newName == ""
-                                        ? "New User"
-                                        : capitalize(newName),
-                                    "",
-                                    "",
-                                    "",
-                                  )
-                                      .whenComplete(() {
-                                    setState(() {
-                                      isLoading = false;
-                                    });
-                                  }),
-                                );
+                                .whenComplete(() {
+                              DatabaseService()
+                                  .updateUserProfil(
+                                newName == ""
+                                    ? "New User"
+                                    : capitalize(newName),
+                                "",
+                                "",
+                                "",
+                              )
+                                  .whenComplete(() {
+                                setState(() {
+                                  isLoading = false;
+                                });
+                              });
+                              DatabaseService().updateUserProfilePic(
+                                  'https://uploads-ssl.webflow.com/61acfcf656a924c51c98f6ee/64fa78089936a3de71318c16_profile.png');
+                            });
                           },
                           child: Container(
                             height: 50,

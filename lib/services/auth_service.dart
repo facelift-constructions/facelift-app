@@ -1,15 +1,14 @@
 import 'dart:developer';
 
 import 'package:facelift_constructions/constants.dart';
-import 'package:facelift_constructions/main.dart';
 import 'package:facelift_constructions/services/databases.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import '../main.dart';
 
 class AuthClass {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final storage = const FlutterSecureStorage();
 
   Future<void> signOut({required BuildContext context}) async {
     try {
@@ -18,6 +17,8 @@ class AuthClass {
       await storage.delete(key: "uid");
       await storage.delete(key: "user_name");
       await storage.delete(key: "usercredential");
+      await storage.delete(key: "skip");
+      await storage.delete(key: "sip");
     } catch (e) {
       showSnackBar(context, e.toString());
     }
@@ -67,16 +68,20 @@ class AuthClass {
     verificationCompleted(PhoneAuthCredential phoneAuthCredential) async {
       showSnackBar(context, "Verification Completed");
     }
+
     verificationFailed(FirebaseAuthException exception) {
       showSnackBar(context, exception.toString());
     }
+
     codeSent(String verificationID, [int? forceResnedingtoken]) {
       showSnackBar(context, "Verification Code sent on the phone number");
       setData(verificationID);
     }
+
     codeAutoRetrievalTimeout(String verificationID) {
       showSnackBar(context, "Time out");
     }
+
     try {
       await _auth.verifyPhoneNumber(
         timeout: const Duration(seconds: 120),
@@ -91,25 +96,20 @@ class AuthClass {
     }
   }
 
-  Future<void> signInwithPhoneNumber(
-      String verificationId, String smsCode, BuildContext context, String name) async {
+  Future<void> signInwithPhoneNumber(String verificationId, String smsCode,
+      BuildContext context, String name) async {
     try {
       AuthCredential authCredential = PhoneAuthProvider.credential(
           verificationId: verificationId, smsCode: smsCode);
       UserCredential userCredential =
           await _auth.signInWithCredential(authCredential);
-      // User? user = userCredential.user;
-      // print(user);
+
       storeTokenAndData(userCredential, context, name);
       number = await getPhone();
       userUid = await getUid();
-      // number = "+917973112165";
-      // await DatabaseService()
-      //     .updateUserData(userrName == "" ? "new user" : userrName);
+
       await DatabaseService().updateUserData();
-      // await DatabaseService().updateUserPremium(null);
-      // await DatabaseService()
-      //     .updatePremiumPage("name", 0, 0, 0, "valueChose", false);
+
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const MyApp()),

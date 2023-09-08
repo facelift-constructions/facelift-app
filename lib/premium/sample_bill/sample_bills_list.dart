@@ -1,6 +1,5 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:facelift_constructions/premium/sample_materials/materials_page.dart';
 import 'package:facelift_constructions/services/databases.dart';
 import 'package:flutter/material.dart';
 import '../../models/models.dart';
@@ -46,14 +45,14 @@ class SampleBillsList extends StatelessWidget {
                                 : "Sample Bills"
                             : "",
                         maxLines: 2,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w400),
                       ),
                       TextButton(
                         onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => AddBillScreen()),
+                              builder: (context) => const AddBillScreen()),
                         ),
                         child: Text(
                           "Add Bills",
@@ -89,7 +88,7 @@ class SampleBillsList extends StatelessWidget {
                                   style:
                                       TextStyle(fontSize: 75, color: pinkColor),
                                 ),
-                                Text(
+                                const Text(
                                   "Bills",
                                   style: TextStyle(fontSize: 16),
                                 )
@@ -126,14 +125,14 @@ class SampleBillsList extends StatelessWidget {
                                 ),
                               );
                             }),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Material(
                           elevation: 10,
                           borderRadius: BorderRadius.circular(16),
                           child: SizedBox(
                             height: 50,
                             width: size.width * 0.5,
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 "Total Amount",
                                 style: TextStyle(
@@ -191,10 +190,40 @@ class SampleBillsList extends StatelessWidget {
                               SampleBillCard(bill: sampleBillList[index]),
                         ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MaterialsPage()),
+                          );
+                        },
+                        child: Material(
+                          borderRadius: BorderRadius.circular(32),
+                          elevation: 10,
+                          shadowColor: Colors.white,
+                          child: Container(
+                            height: 35,
+                            width: size.width * 0.8,
+                            decoration: BoxDecoration(
+                              color: pinkColor,
+                              borderRadius: BorderRadius.circular(32),
+                            ),
+                            child: const Center(child: Text("Manage Materials")),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             );
           } else {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
         });
   }
@@ -267,7 +296,7 @@ class UserBillCard extends StatelessWidget {
                   name,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
-                  style: TextStyle(fontSize: 12),
+                  style: const TextStyle(fontSize: 12),
                 ),
               ),
             ),
@@ -277,7 +306,7 @@ class UserBillCard extends StatelessWidget {
                 width: 100,
                 child: Text(
                   "Rs $amount",
-                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
+                  style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
                 ),
               ),
             ),
@@ -302,7 +331,7 @@ class SampleBillCard extends StatelessWidget {
       child: InkWell(
         onTap: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => AddBillScreen()),
+          MaterialPageRoute(builder: (context) => const AddBillScreen()),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -325,14 +354,14 @@ class SampleBillCard extends StatelessWidget {
               padding: const EdgeInsets.only(left: 8, top: 8, bottom: 4),
               child: Text(
                 bill.name,
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Text(
                 bill.amount,
-                style: TextStyle(fontSize: 10, fontWeight: FontWeight.w300),
+                style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w300),
               ),
             ),
           ],

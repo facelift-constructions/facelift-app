@@ -1,3 +1,4 @@
+import 'package:facelift_constructions/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -5,14 +6,14 @@ import '../dialogs.dart';
 import '../services/databases.dart';
 import '../constants.dart';
 
-class NewPrimiumUserScreen extends StatefulWidget {
-  const NewPrimiumUserScreen({Key? key}) : super(key: key);
+class NewPrimiumUserPop extends StatefulWidget {
+  const NewPrimiumUserPop({Key? key}) : super(key: key);
 
   @override
-  _NewPrimiumUserScreenState createState() => _NewPrimiumUserScreenState();
+  _NewPrimiumUserPopState createState() => _NewPrimiumUserPopState();
 }
 
-class _NewPrimiumUserScreenState extends State<NewPrimiumUserScreen> {
+class _NewPrimiumUserPopState extends State<NewPrimiumUserPop> {
   List dropDownItems = [
     "New House",
     "Renovation",
@@ -97,10 +98,6 @@ class _NewPrimiumUserScreenState extends State<NewPrimiumUserScreen> {
         appBar: AppBar(
           toolbarHeight: 75,
           elevation: 0,
-          leading: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.arrow_back_ios_new),
-          ),
           title: const Text("Design My Home",
               style: TextStyle(color: Colors.black)),
           centerTitle: true,
@@ -548,6 +545,33 @@ class _NewPrimiumUserScreenState extends State<NewPrimiumUserScreen> {
                     ],
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () async {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MyApp()),
+                            (route) => false,
+                          );
+                          skipped == true;
+                          await storage.write(key: 'skip', value: 'true');
+                        },
+                        child: const Text(
+                          'Skip For now',
+                          style: TextStyle(
+                            color: Colors.black54,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),
