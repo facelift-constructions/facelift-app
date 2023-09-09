@@ -59,6 +59,14 @@ class ContactScreen extends StatelessWidget {
               },
               isTrue: true,
             ),
+            ProfileMenu(
+              name: "Instagram",
+              press: () {
+                _launchUrl(
+                    'https://www.instagram.com/facelift.constructions/');
+              },
+              isTrue: true,
+            ),
           ],
         ),
       ),

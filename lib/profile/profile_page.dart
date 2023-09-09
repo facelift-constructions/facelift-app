@@ -143,14 +143,6 @@ class _PofileScreenState extends State<PofileScreen> {
                           isTrue: false,
                         ),
                         ProfileMenu(
-                          name: "Instagram",
-                          press: () {
-                            _launchUrl(
-                                'https://www.instagram.com/facelift.constructions/');
-                          },
-                          isTrue: false,
-                        ),
-                        ProfileMenu(
                           name: "Contact",
                           press: () {
                             Navigator.push(
@@ -190,7 +182,7 @@ class _PofileScreenState extends State<PofileScreen> {
                         ),
                         const SizedBox(height: 5),
                         const Text(
-                          "v3.1.0+17",
+                          "v3.1.1+17",
                           style: TextStyle(
                               fontSize: 12, fontWeight: FontWeight.w300),
                         ),

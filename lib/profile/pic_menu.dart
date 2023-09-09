@@ -38,7 +38,9 @@ class ProfileMenu extends StatelessWidget {
                         ? "assets/images/phone.png"
                         : name == "Email"
                             ? "assets/images/email.png"
-                            : "assets/images/whatsapp.png",
+                            : name == "Instagram"
+                                ? "assets/images/insta.png"
+                                : "assets/images/whatsapp.png",
                     width: 22,
                   )
                 : const SizedBox(),
